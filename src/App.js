@@ -1,24 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Registration from "./components/userAuthorization/registration/Registration";
+import Authentication from "./components/userAuthorization/authentication/Authentication"
+
+function Car(props){
+  return(
+      <div>
+        <div> Name: {props.name}</div>
+        <div> Model: {props.model} </div>
+        <div>Year: {props.year}</div>
+      </div>
+  )
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <Registration/>
+     //   <Authentication/>
   );
 }
 
