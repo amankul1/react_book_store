@@ -14,8 +14,8 @@ function Car(props){
 
 function App() {
   return (
-        <Registration/>
-     //   <Authentication/>
+       <Registration/>
+       //<Authentication/>
   );
 }
 
