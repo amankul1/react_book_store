@@ -50,7 +50,7 @@ function Authentication(){
         <div style={{ width: "100vw", height: "100vh" }}>
             <AuthorizationHeader/>
             <div className={css.imageWrapper}>
-                <img className={css.booksImage} src={books_image} />
+                <img alt="" className={css.booksImage} src={books_image} />
             </div>
             <div className={css.formWrapper}>
                 <form className="form-control">

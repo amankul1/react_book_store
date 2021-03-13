@@ -66,7 +66,7 @@ function Registration(){
         <div style={{ width: "100vw", height: "100vh" }}>
             <AuthorizationHeader/>
             <div className={css.imageWrapper}>
-                <img className={css.booksImage} src={books_image} />
+                <img  className={css.booksImage} src={books_image} alt="" />
             </div>
             <div className={css.formWrapper}>
                 <form className="form-control">

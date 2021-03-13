@@ -1,0 +1,32 @@
+.footerWrapper{
+    margin: 5px 0 0 0;
+    width: 100%;
+    height: 230px;
+    border: 1px solid rgba(0,0,0,0.3);
+}
+.overBlock{
+    width: 100%;
+    height: 170px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.lowBlock{
+    border-top: 1px solid rgba(0,0,0,0.3);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0,0,0,0.5);
+}
+.lowBlock span:hover{
+    cursor: no-drop;
+}
+.footerLinksList{
+    margin: 10px;
+    list-style: none;
+}
+.footerLinksList li:hover{
+    cursor: pointer;
+}
