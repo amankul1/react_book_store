@@ -1,0 +1,17 @@
+.SubMenu{
+    width: 100%;
+    padding: 65px 0 0 0;
+    position: sticky;
+    display: flex;
+    justify-content: center;
+}
+.list{
+    width: 100%;
+}
+.listHeader{
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+.listItem{
+    padding-left: 30px;
+    height: 40px;
+}

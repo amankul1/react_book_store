@@ -1,12 +1,12 @@
 import React from "react";
-import {Box, Paper} from "@material-ui/core";
+import {Box} from "@material-ui/core";
 import classes from "./css/footer.module.css";
 
 const FooterComponent = ()=>{
     return (
         <Box component="div" className={classes.footerWrapper}>
             <div className={classes.overBlock}>
-                <Paper >
+                <div >
                     <ul className={classes.footerLinksList}>
                         <li><h5>Menu links</h5></li>
                         <li>Home</li>
@@ -14,8 +14,8 @@ const FooterComponent = ()=>{
                         <li>Books</li>
                         <li>Authors</li>
                     </ul>
-                </Paper>
-                <Paper>
+                </div>
+                <div>
                     <ul className={classes.footerLinksList}>
                         <li><h5>Contact</h5></li>
                         <li>Tel: +996(XXX)-XXX-XXX</li>
@@ -23,7 +23,7 @@ const FooterComponent = ()=>{
                         <li>Address: г. Бишкек, ул. Манас, д. 08а</li>
                         <li>Имя. Name</li>
                     </ul>
-                </Paper>
+                </div>
             </div>
             <div className={classes.lowBlock}>
                 <span>Team Project</span>

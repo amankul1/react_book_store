@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import AuthorizationHeader from "../AuthorizationHeader";
 import css from "../authorizationCss/authorization.module.css";
 import books_image from "../authorizationImages/booksImage.jpg";
+import withRegistration from './withRegistration';
 
 function Registration(){
 
@@ -53,14 +54,24 @@ function Registration(){
         }
     }
 
-    const sendHandler = (e)=>{
+    const sendHandler = async (e)=>{
         e.preventDefault();
         if(isLastNameValid&&isFirstNameValid&&emailValid&&passwordValid){
             console.log(lastName, firstName, email, password, role);
         }else{
             alert("Some field uncorrected (password: 4-12 symbols)");
         }
+        withRegistration().then(
+            (response)=>{
+                console.log(response.data)
+            }
+        ).catch(
+            (err)=>{
+                console.log(err);
+            }
+        )
     }
+
 
     return(
         <div style={{ width: "100vw", height: "100vh" }}>

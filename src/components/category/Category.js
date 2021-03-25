@@ -1,0 +1,99 @@
+import React from "react";
+import HeaderComponent from "../general/header/HeaderComponent";
+import MenuComponent from "../general/menu/MenuComponent";
+import FooterComponent from "../general/footer/FooterComponent";
+import CategoryContent from "../category/CategoryContent/CategoryContent";
+
+class  Category extends React.Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchText: '',
+            booksList : {
+                books:[
+                    {
+                        name: "Karl Mark",
+                        author: "KAZUO ISHIGURO",
+                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
+                    },
+                    {
+                        name: "Karl Mark",
+                        author: "KAZUO ISHIGURO",
+                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
+                    },
+                    {
+                        name: "Karl Mark",
+                        author: "KAZUO ISHIGURO",
+                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
+                    },
+                    {
+                        name: "Karl Mark",
+                        author: "KAZUO ISHIGURO",
+                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
+                    },
+                    {
+                        name: "Karl Mark",
+                        author: "KAZUO ISHIGURO",
+                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
+                    },
+                    {
+                        name: "Karl Mark",
+                        author: "KAZUO ISHIGURO",
+                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
+                    }
+                ]
+            },
+            genders:[
+                {
+                    name: "Menu Name"
+                },
+                {
+                    name: "Menu Name"
+                },
+                {
+                    name: "Menu Name"
+                },{
+                    name: "Menu Name"
+                },
+                {
+                    name: "Menu Name"
+                },
+                {
+                    name: "Menu Name"
+                }
+            ]
+
+        }
+    }
+
+    searchChangeHandle = (text)=>{
+        this.setState((prevState)=>{
+            return(
+                {searchText: text}
+            )
+        })
+        console.log(this.state.searchText);
+    }
+
+    render() {
+        return(
+            <div>
+                <HeaderComponent
+                    searchText={this.state.searchText}
+                    searchChangeHandler={this.searchChangeHandle}
+                />
+                <MenuComponent/>
+
+                <CategoryContent
+                    booksList = {this.state.booksList}
+                    genders = {this.state.genders}
+                />
+
+                <FooterComponent/>
+            </div>
+        )
+    }
+}
+
+export default Category;

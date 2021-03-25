@@ -3,6 +3,7 @@ import {TextField, Box, Button} from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import classes from './css/header.module.css';
 import logo from "../../userAuthorization/authorizationImages/logo.png"
+import {NavLink} from "react-router-dom";
 
 
 const HeaderComponent = (props)=>{
@@ -10,11 +11,9 @@ const HeaderComponent = (props)=>{
     return (
         <div className={classes.mainWrapper}>
             <Grid container spacing={0}>
-                <Grid className={classes.headerItemsWrapper} item xs={2}>
+                <Grid className={classes.headerItemsWrapper} item xs={4}>
                     <img className={classes.logoImage} src={logo} alt=""/>
-                </Grid>
-                <Grid className={classes.headerItemsWrapper} item xs={2}>
-                    <h3 style={{color: "#4F0A0A", fontWeight: "bold"}}>BOOK <br/>STORE </h3>
+                    <h3 style={{width:"100%", textAlign: "center    ", color: "#4F0A0A", fontWeight: "bold"}}>LIBOOKS</h3>
                 </Grid>
                 <Grid className={classes.headerItemsWrapper} item xs={5}>
                     <Box component="div" className={classes.searchWrapper}>
@@ -32,9 +31,9 @@ const HeaderComponent = (props)=>{
                 </Grid>
                 <Grid className={classes.headerItemsWrapper} item xs={3}>
                     <Box component="div" className={classes.authorizationLinksWrapper}>
-                        <Button color="default">Log in</Button>
+                        <NavLink to="/authentication"><Button color="default">Log in</Button></NavLink>
                         <div className={classes.vl}/>
-                        <Button color="default">Registration</Button>
+                        <NavLink to="/registration"><Button color="default">Registration</Button></NavLink>
                     </Box>
                 </Grid>
             </Grid>

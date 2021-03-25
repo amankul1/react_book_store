@@ -1,0 +1,9 @@
+.carousel{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cardLink{
+    padding: 5px;
+}
