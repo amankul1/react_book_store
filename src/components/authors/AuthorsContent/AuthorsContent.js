@@ -1,10 +1,10 @@
-import React from "react"
-import classes from "./CategoryContent.module.css";
+import React from "react";
+import classes from "./AuthorsContent.module.css";
 import BookCard from "../../general/BookCard/BookCard";
 import SubMenu from "../../general/SubMenu/SubMenu";
 import {NavLink} from "react-router-dom";
 
-const CategoryContent = (props)=>{
+const AuthorsContent = (props)=>{
     return(
         <div className={classes.CategoryContentWrapper}>
             <div className={classes.CategoryMenuWrapper}>
@@ -15,7 +15,7 @@ const CategoryContent = (props)=>{
             <div className={classes.CategoryContent}>
 
                 <div className={classes.CategoryContentTitle}>
-                    GenderName
+                    Author Name
                 </div>
 
                 {props.booksList.books.map((book, index)=>{
@@ -35,4 +35,4 @@ const CategoryContent = (props)=>{
     )
 }
 
-export default CategoryContent;
+export default AuthorsContent;

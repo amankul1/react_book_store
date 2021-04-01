@@ -8,18 +8,24 @@ import Authors from "./components/authors/Authors";
 import Category from "./components/category/Category";
 import HomePage from "./components/home/HomePage";
 import BookInfo from "./components/BookInfo/BookInfo";
+import ForgotPassword from "./components/userAuthorization/forgotPassword/ForgotPassword";
+import ChangePassword from "./components/userAuthorization/ChangePassword/ChangePassword";
+import AboutWriter from "./components/AboutWriter/AboutWriter";
 
 function App() {
   return (
       <>
         <Switch>
-            <Route exect path='/registration' component={Registration}/>
-            <Route exect path='/authentication' component={Authentication}/>
-            <Route exect path="/home" component={HomePage}/>
-            <Route exect path="/books" component={Books}/>
-            <Route exect path="/category" component={Category}/>
-            <Route exect path="/authors" component={Authors}/>
-            <Route exict path="/book-info/:bookId" component={BookInfo}/>
+            <Route path='/registration' component={Registration}/>
+            <Route path='/authentication' component={Authentication}/>
+            <Route path="/home" component={HomePage}/>
+            <Route path="/books" component={Books}/>
+            <Route path="/category" component={Category}/>
+            <Route path="/authors" component={Authors}/>
+            <Route path="/book/info/:bookId" component={BookInfo}/>
+            <Route path="/forget-password" component={ForgotPassword}/>
+            <Route path={"/change-password"} component={ChangePassword}/>
+            <Route path={"/book/author/:id"}  component={AboutWriter}/>
             <Route render={()=><h1>Error 404</h1>}/>
         </Switch>
       </>

@@ -13,31 +13,37 @@ class  Category extends React.Component{
             booksList : {
                 books:[
                     {
+                        id:1,
+                        name: "Karl Mark dfsvsd asdfvsd",
+                        author: "KAZUO ISHIGUROs sdfsdf sdfv",
+                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
+                    },
+                    {
+                        id:2,
                         name: "Karl Mark",
                         author: "KAZUO ISHIGURO",
                         image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
                     },
                     {
+                        id:3,
                         name: "Karl Mark",
                         author: "KAZUO ISHIGURO",
                         image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
                     },
                     {
+                        id:4,
                         name: "Karl Mark",
                         author: "KAZUO ISHIGURO",
                         image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
                     },
                     {
+                        id:5,
                         name: "Karl Mark",
                         author: "KAZUO ISHIGURO",
                         image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
                     },
                     {
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
+                        id:6,
                         name: "Karl Mark",
                         author: "KAZUO ISHIGURO",
                         image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
