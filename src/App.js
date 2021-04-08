@@ -11,14 +11,18 @@ import BookInfo from "./components/BookInfo/BookInfo";
 import ForgotPassword from "./components/userAuthorization/forgotPassword/ForgotPassword";
 import ChangePassword from "./components/userAuthorization/ChangePassword/ChangePassword";
 import AboutWriter from "./components/AboutWriter/AboutWriter";
+import UserRoom from "./components/UserRoom/UserRoom";
+import api from "./api/api";
 
 function App() {
+    api();
   return (
       <>
         <Switch>
             <Route path='/registration' component={Registration}/>
             <Route path='/authentication' component={Authentication}/>
             <Route path="/home" component={HomePage}/>
+            <Route path="/" exact component={HomePage}/>
             <Route path="/books" component={Books}/>
             <Route path="/category" component={Category}/>
             <Route path="/authors" component={Authors}/>
@@ -26,6 +30,7 @@ function App() {
             <Route path="/forget-password" component={ForgotPassword}/>
             <Route path={"/change-password"} component={ChangePassword}/>
             <Route path={"/book/author/:id"}  component={AboutWriter}/>
+            <Route path="/user/room"  component={UserRoom} />
             <Route render={()=><h1>Error 404</h1>}/>
         </Switch>
       </>

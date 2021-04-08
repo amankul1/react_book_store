@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import AuthorizationHeader from "../AuthorizationHeader";
 import css from "../authorizationCss/authorization.module.css";
 import books_image from "../authorizationImages/booksImage.jpg";
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 function Authentication(){
 
@@ -12,6 +12,7 @@ function Authentication(){
     let [emailValid, setEmailValid] = useState(false);
     const [passDirty, setPassDirty] = useState(false);
     let [passwordValid, setPasswordValid] = useState(false);
+    let [isLogin, setIsLogin] = useState(false);
 
     const emailHandler = (e)=>{
         setEmail(e.target.value);
@@ -42,40 +43,47 @@ function Authentication(){
         e.preventDefault();
         if(passwordValid&&emailValid){
             console.log(email, password);
+            setIsLogin(true);
         }else{
             alert("Email or password uncorrected (password: 4-12 symbols)");
         }
     }
 
-    return(
-        <div style={{ width: "100vw", height: "100vh" }}>
-            <AuthorizationHeader/>
-            <div className={css.imageWrapper}>
-                <img alt="" className={css.booksImage} src={books_image} />
-            </div>
-            <div className={css.formWrapper}>
-                <form className="form-control">
-                    <div className={css.formTitle}>
-                        <h2>AUTHENTICATION</h2>
-                    </div>
-                    <div className="form-control">
-                        <label className={css.formLabel} htmlFor="email">Email</label><br/>
-                        <input className={css.formInput} style = {(emailValid && emailDirty)?{borderColor:"#732C9F"}:{borderColor:"red"}} type="text" id="email" onBlur={emailDirtyHandler} onChange={emailHandler} value={email}/>
-                    </div><br/>
-                    <div className="form-control">
-                        <label className={css.formLabel} htmlFor="password">Password</label><br/>
-                        <input className={css.formInput} style = {(passwordValid && passDirty)?{borderColor:"#732C9F"}:{borderColor:"red"}} type="text" id="password" onChange={passwordHandler} onBlur={passDirtyHandler} value={password}/>
-                    </div><br/>
+    if(isLogin){
+        return(
+            <Redirect to="/user/room" exect/>
+        )
+    }else{
+        return(
+            <div style={{ width: "100vw", height: "100vh" }}>
+                <AuthorizationHeader/>
+                <div className={css.imageWrapper}>
+                    <img alt="" className={css.booksImage} src={books_image} />
+                </div>
+                <div className={css.formWrapper}>
+                    <form className="form-control">
+                        <div className={css.formTitle}>
+                            <h2>AUTHENTICATION</h2>
+                        </div>
+                        <div className="form-control">
+                            <label className={css.formLabel} htmlFor="email">Email</label><br/>
+                            <input className={css.formInput} style = {(emailValid && emailDirty)?{borderColor:"#732C9F"}:{borderColor:"red"}} type="text" id="email" onBlur={emailDirtyHandler} onChange={emailHandler} value={email}/>
+                        </div><br/>
+                        <div className="form-control">
+                            <label className={css.formLabel} htmlFor="password">Password</label><br/>
+                            <input className={css.formInput} style = {(passwordValid && passDirty)?{borderColor:"#732C9F"}:{borderColor:"red"}} type="text" id="password" onChange={passwordHandler} onBlur={passDirtyHandler} value={password}/>
+                        </div><br/>
 
-                    <div className={css.formButton}>
-                        <button style={{backgroundColor: "#732C9F", color: "white", width: "80%"}} onClick={sendHandler} className="btn">Отправить</button>
-                    </div>
-                    <br/><br/><br/>
-                    <NavLink to="forget-password">Forget password</NavLink>
-                </form>
+                        <div className={css.formButton}>
+                            <button style={{backgroundColor: "#732C9F", color: "white", width: "80%"}} onClick={sendHandler} className="btn">Отправить</button>
+                        </div>
+                        <br/><br/><br/>
+                        <NavLink to="forget-password">Forget password</NavLink>
+                    </form>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default Authentication;
