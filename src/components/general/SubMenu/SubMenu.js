@@ -14,13 +14,13 @@ const SubMenu =(props)=>{
         <div className={classes.SubMenu}>
             <List component="nav" aria-label="secondary mailbox folders" className={classes.list}>
                 <ListSubheader component="div" id="nested-list-subheader" className={classes.listHeader}>
-                    Category
+                    {props.title}
                 </ListSubheader>
 
                 {
                     props.genders.map((item, index)=>{
                         return(
-                            <ListItemLink key={index} href="#simple-list" className={classes.listItem}>
+                            <ListItemLink key={index} onClick={()=>{ props.onClick(item.name) }} className={classes.listItem}>
                                 <ListItemText primary={item.name} />
                             </ListItemLink>
                         )

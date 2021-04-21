@@ -1,5 +1,6 @@
 import './App.css';
 import "fontsource-roboto";
+import React from "react";
 import {Switch, Route} from "react-router-dom";
 import Registration from "./components/userAuthorization/registration/Registration";
 import Authentication from "./components/userAuthorization/authentication/Authentication";
@@ -12,10 +13,9 @@ import ForgotPassword from "./components/userAuthorization/forgotPassword/Forgot
 import ChangePassword from "./components/userAuthorization/ChangePassword/ChangePassword";
 import AboutWriter from "./components/AboutWriter/AboutWriter";
 import UserRoom from "./components/UserRoom/UserRoom";
-import api from "./api/api";
+import ActivateAccount from "./components/userAuthorization/ActivateAccount /ActivateAccount";
 
 function App() {
-    api();
   return (
       <>
         <Switch>
@@ -31,6 +31,7 @@ function App() {
             <Route path={"/change-password"} component={ChangePassword}/>
             <Route path={"/book/author/:id"}  component={AboutWriter}/>
             <Route path="/user/room"  component={UserRoom} />
+            <Route path="/user/account/activate" component={ActivateAccount}/>
             <Route render={()=><h1>Error 404</h1>}/>
         </Switch>
       </>

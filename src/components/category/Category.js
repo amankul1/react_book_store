@@ -3,6 +3,7 @@ import HeaderComponent from "../general/header/HeaderComponent";
 import MenuComponent from "../general/menu/MenuComponent";
 import FooterComponent from "../general/footer/FooterComponent";
 import CategoryContent from "../category/CategoryContent/CategoryContent";
+import axios from "axios";
 
 class  Category extends React.Component{
 
@@ -50,25 +51,7 @@ class  Category extends React.Component{
                     }
                 ]
             },
-            genders:[
-                {
-                    name: "Menu Name"
-                },
-                {
-                    name: "Menu Name"
-                },
-                {
-                    name: "Menu Name"
-                },{
-                    name: "Menu Name"
-                },
-                {
-                    name: "Menu Name"
-                },
-                {
-                    name: "Menu Name"
-                }
-            ]
+            genders:[]
 
         }
     }
@@ -82,6 +65,25 @@ class  Category extends React.Component{
         console.log(this.state.searchText);
     }
 
+    async componentDidMount() {
+        try{
+            const response =  await axios.get('http://pj-bookstore.herokuapp.com/category');
+            let arr = [];
+            response.data.forEach((item)=>{
+                arr.push({name: item.name})
+            })
+            const tempState = {...this.state}
+            tempState.genders = arr;
+            this.setState(tempState);
+        }catch (e){
+            alert("What went wrong !")
+        }
+    }
+
+    subMenuHandler(name){
+        alert(name);
+    }
+
     render() {
         return(
             <div>
@@ -92,6 +94,7 @@ class  Category extends React.Component{
                 <MenuComponent/>
 
                 <CategoryContent
+                    onClick={this.subMenuHandler}
                     booksList = {this.state.booksList}
                     genders = {this.state.genders}
                 />

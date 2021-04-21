@@ -6,6 +6,7 @@ import HomeSlider from "./HomeSlider";
 import HomeContent from "./HomeContent";
 import SliderData from "./SliderData";
 
+
 class  HomePage extends React.Component {
 
     constructor(props) {
@@ -189,6 +190,7 @@ class  HomePage extends React.Component {
     }
 
     render() {
+
         return (
             <div>
                 <HeaderComponent

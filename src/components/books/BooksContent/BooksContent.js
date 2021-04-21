@@ -9,6 +9,8 @@ const BooksContent = (props)=>{
         <div className={classes.CategoryContentWrapper}>
             <div className={classes.CategoryMenuWrapper}>
                 <SubMenu
+                    onClick = {props.onClick}
+                    title="Books"
                     genders={props.genders}
                 />
             </div>

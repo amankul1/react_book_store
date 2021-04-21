@@ -3,6 +3,7 @@ import HeaderComponent from "../general/header/HeaderComponent";
 import MenuComponent from "../general/menu/MenuComponent";
 import FooterComponent from "../general/footer/FooterComponent";
 import AuthorsContent from "./AuthorsContent/AuthorsContent";
+import axios from "axios";
 
 class  Authors extends React.Component{
 
@@ -50,25 +51,7 @@ class  Authors extends React.Component{
                     }
                 ]
             },
-            genders:[
-                {
-                    name: "Author Name"
-                },
-                {
-                    name: "Author Name"
-                },
-                {
-                    name: "Author Name"
-                },{
-                    name: "Author Name"
-                },
-                {
-                    name: "Author Name"
-                },
-                {
-                    name: "Author Name"
-                }
-            ]
+            authors:[]
 
         }
     }
@@ -82,6 +65,26 @@ class  Authors extends React.Component{
         console.log(this.state.searchText);
     }
 
+    async componentDidMount() {
+        try{
+            const response =  await axios.get('http://pj-bookstore.herokuapp.com/author');
+            let arr = [];
+            response.data.forEach((item)=>{
+                arr.push({name: item.name})
+            })
+            const tempState = {...this.state}
+            tempState.authors = arr;
+            this.setState(tempState);
+
+        }catch (e){
+            alert("What went wrong !")
+        }
+    }
+
+    subMenuHandler(name){
+        alert(name);
+    }
+
     render() {
         return(
             <div>
@@ -92,8 +95,9 @@ class  Authors extends React.Component{
                 <MenuComponent/>
 
                 <AuthorsContent
+                    onClick={this.subMenuHandler}
                     booksList = {this.state.booksList}
-                    genders = {this.state.genders}
+                    genders = {this.state.authors}
                 />
 
                 <FooterComponent/>

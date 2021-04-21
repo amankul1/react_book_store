@@ -50,24 +50,10 @@ class  Books extends React.Component{
                     }
                 ]
             },
-            genders:[
-                {
-                    name: "Menu Name"
-                },
-                {
-                    name: "Menu Name"
-                },
-                {
-                    name: "Menu Name"
-                },{
-                    name: "Menu Name"
-                },
-                {
-                    name: "Menu Name"
-                },
-                {
-                    name: "Menu Name"
-                }
+            tops:[
+                {name: "Popular books"},
+                {name: "Popular books"},
+                {name: "Popular books"}
             ]
 
         }
@@ -82,6 +68,10 @@ class  Books extends React.Component{
         console.log(this.state.searchText);
     }
 
+    subMenuHandler(name){
+        alert(name);
+    }
+
     render() {
         return(
             <div>
@@ -92,8 +82,9 @@ class  Books extends React.Component{
                 <MenuComponent/>
 
                 <BooksContent
+                    onClick={this.subMenuHandler}
                     booksList = {this.state.booksList}
-                    genders = {this.state.genders}
+                    genders = {this.state.tops}
                 />
 
                 <FooterComponent/>

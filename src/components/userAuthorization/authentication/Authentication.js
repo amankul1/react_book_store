@@ -3,6 +3,7 @@ import AuthorizationHeader from "../AuthorizationHeader";
 import css from "../authorizationCss/authorization.module.css";
 import books_image from "../authorizationImages/booksImage.jpg";
 import {NavLink, Redirect} from "react-router-dom";
+import axios from "axios";
 
 function Authentication(){
 
@@ -11,8 +12,8 @@ function Authentication(){
     const [emailDirty, setEmailDirty] = useState(false);
     let [emailValid, setEmailValid] = useState(false);
     const [passDirty, setPassDirty] = useState(false);
-    let [passwordValid, setPasswordValid] = useState(false);
-    let [isLogin, setIsLogin] = useState(false);
+    const [passwordValid, setPasswordValid] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
 
     const emailHandler = (e)=>{
         setEmail(e.target.value);
@@ -39,11 +40,25 @@ function Authentication(){
         }
     }
 
-    const sendHandler = (e)=>{
+    const sendHandler = async (e)=>{
         e.preventDefault();
         if(passwordValid&&emailValid){
-            console.log(email, password);
-            setIsLogin(true);
+            try {
+                const response = await axios({
+                    method: 'post',
+                    url: 'http://pj-bookstore.herokuapp.com/register/auth',
+                    data: {
+                        'email': email,
+                        'password': password,
+                    },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                setIsLogin(true);
+            } catch (e) {
+                alert("Email or password dont correct try again !");
+            }
         }else{
             alert("Email or password uncorrected (password: 4-12 symbols)");
         }
