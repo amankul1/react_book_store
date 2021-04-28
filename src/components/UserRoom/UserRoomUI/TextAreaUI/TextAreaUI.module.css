@@ -1,0 +1,14 @@
+.textAreaWrapper{
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.textAreaWrapper label{
+    width: 20%;
+    font-size: 18px;
+}
+.textAreaWrapper span{
+    margin-left: 20%;
+    color: #f01f30;
+}

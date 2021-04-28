@@ -1,11 +1,14 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import AuthorizationHeader from "../AuthorizationHeader";
 import css from "../authorizationCss/authorization.module.css";
 import books_image from "../authorizationImages/booksImage.jpg";
 import {NavLink, Redirect} from "react-router-dom";
 import axios from "axios";
+import {userContext} from "../../../App";
 
 function Authentication(){
+
+    const myContext = useContext(userContext);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -42,6 +45,7 @@ function Authentication(){
 
     const sendHandler = async (e)=>{
         e.preventDefault();
+
         if(passwordValid&&emailValid){
             try {
                 const response = await axios({
@@ -55,7 +59,20 @@ function Authentication(){
                         'Content-Type': 'application/json'
                     }
                 })
-                setIsLogin(true);
+                if(response.status === 200){
+                    try{
+                        let url = 'http://pj-bookstore.herokuapp.com/user/email/'+email;
+                        const res = await axios.get(url);
+                        setIsLogin(true);
+                        myContext.setUserToken(response.data.token);
+                        myContext.setUserId(res.data.id);
+                        myContext.setUserEmail(res.data.email);
+                        myContext.setUserRole(res.data.occupation);
+                        myContext.setIsLogin(true);
+                    }catch (e) {
+                        alert("Error, try again !");
+                    }
+                }
             } catch (e) {
                 alert("Email or password dont correct try again !");
             }
@@ -66,7 +83,7 @@ function Authentication(){
 
     if(isLogin){
         return(
-            <Redirect to="/user/room" exect/>
+            <Redirect to="/" exact/>
         )
     }else{
         return(

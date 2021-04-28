@@ -20,11 +20,11 @@ const CategoryContent = (props)=>{
                     GenderName
                 </div>
 
-                {props.booksList.books.map((book, index)=>{
+                {props.books.map((book, index)=>{
                     return(
                         <NavLink to={`/book/info/${book.id}`} key={index}>
                             <BookCard
-                                book={book}
+                                list={book}
                             />
                         </NavLink>
                     )

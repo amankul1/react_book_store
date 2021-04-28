@@ -4,15 +4,11 @@
     position: relative;
 }
 .CategoryContent{
-    width: 70%;
+    width: 85%;
     padding: 30px 30px 0 30px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-}
-.CategoryMenuWrapper{
-    width: 15%;
-    background-color: #EBEFF2;
 }
 .CategoryAdvertisingWrapper{
     width: 15%;

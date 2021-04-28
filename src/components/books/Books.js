@@ -10,7 +10,6 @@ class  Books extends React.Component{
         super(props);
         this.state = {
             searchText: '',
-            booksList : {
                 books:[
                     {
                         id:1,
@@ -48,8 +47,7 @@ class  Books extends React.Component{
                         author: "KAZUO ISHIGURO",
                         image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
                     }
-                ]
-            },
+                ],
             tops:[
                 {name: "Popular books"},
                 {name: "Popular books"},
@@ -83,7 +81,7 @@ class  Books extends React.Component{
 
                 <BooksContent
                     onClick={this.subMenuHandler}
-                    booksList = {this.state.booksList}
+                    books = {this.state.books}
                     genders = {this.state.tops}
                 />
 

@@ -1,0 +1,45 @@
+*{
+    box-sizing: border-box;
+}
+.UserRoom{
+    width: 100vw;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+.header{
+    width: 100%;
+}
+.verticalMenu{
+    position: relative;
+    width:20%;
+    background: #EBEFF2;
+    border-right: 1px solid rgba(0,0,0,0.3);
+}
+.content{
+    width: 80%;
+    position: relative;
+}
+
+.content .personalInfo{
+    width: 70%;
+    padding: 20px 0;
+    background: #EBEFF2;
+    border-radius: 5px;
+    margin: 50px auto;
+}
+
+.content .personalInfo h4{
+    margin-left: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+.content .personalInfo button{
+    width: 20%;
+    margin-left:70%;
+    height: 35px;
+}
+
+.footer{
+    width: 100%;
+}

@@ -31,7 +31,7 @@ function ForgetPassword(){
         if(emailValid){
             let url = 'http://pj-bookstore.herokuapp.com/register/forgotPassword/'+email;
             try{
-                const response = await axios.post(url);
+                await axios.post(url);
                 alert("Check your mail!")
                 setSuccessResponse(true);
             }catch (e){

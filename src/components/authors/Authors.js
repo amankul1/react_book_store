@@ -11,48 +11,7 @@ class  Authors extends React.Component{
         super(props);
         this.state = {
             searchText: '',
-            booksList : {
-                books:[
-                    {
-                        id:1,
-                        name: "Karl Mark dfsvsd asdfvsd",
-                        author: "KAZUO ISHIGUROs sdfsdf sdfv",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:2,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:3,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:4,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:5,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:6,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    }
-                ]
-            },
-            authors:[]
-
+            authors: []
         }
     }
 
@@ -70,7 +29,7 @@ class  Authors extends React.Component{
             const response =  await axios.get('http://pj-bookstore.herokuapp.com/author');
             let arr = [];
             response.data.forEach((item)=>{
-                arr.push({name: item.name})
+                arr.push({id: item.id, name: item.name, image: item.image})
             })
             const tempState = {...this.state}
             tempState.authors = arr;
@@ -96,8 +55,7 @@ class  Authors extends React.Component{
 
                 <AuthorsContent
                     onClick={this.subMenuHandler}
-                    booksList = {this.state.booksList}
-                    genders = {this.state.authors}
+                    authors = {this.state.authors}
                 />
 
                 <FooterComponent/>

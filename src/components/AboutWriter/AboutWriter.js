@@ -1,12 +1,12 @@
 import React from "react";
 import classes from "./AboutWriter.module.css";
-import {NavLink} from "react-router-dom";
+import HeaderComponent from "../general/header/HeaderComponent";
 
 const AboutWriter = (match)=>{
     return(
         <div>
             <div className={classes.headerWrapper}>
-                <NavLink to={"/home"}><button className="btn btn-light">Back to store</button></NavLink>
+                <HeaderComponent/>
             </div>
             <div className={classes.contentWrapper}>
                 <div className={classes.contentLeft}>

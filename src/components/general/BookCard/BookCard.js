@@ -13,16 +13,19 @@ const BookCard = (props)=>{
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image={props.book.image}
+                    image={props.list.image}
                     title="Contemplative Reptile"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h6" component="h6">
-                        {props.book.author}
+                        {props.list.name}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {props.book.name}
-                    </Typography>
+                    {props.list.author ?
+                        <Typography gutterBottom variant="h6" component="h6">
+                            {props.list.name}
+                        </Typography> :
+                        null
+                    }
                 </CardContent>
             </CardActionArea>
         </Card>

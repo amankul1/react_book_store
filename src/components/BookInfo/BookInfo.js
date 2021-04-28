@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./BookInfo.module.css"
+import HeaderComponent from "../general/header/HeaderComponent";
 import {NavLink} from "react-router-dom";
 
 const BookInfo = ({match, location})=> {
@@ -7,7 +8,7 @@ const BookInfo = ({match, location})=> {
     return (
         <div>
             <div className={classes.headerWrapper}>
-                <NavLink to={"/home"}><button className="btn btn-light">Back to store</button></NavLink>
+                <HeaderComponent/>
             </div>
             <div className={classes.contentWrapper}>
                 <div className={classes.contentLeft}>

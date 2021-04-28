@@ -1,0 +1,17 @@
+.inputWrapper{
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.inputWrapper label{
+    width: 20%;
+    font-size: 18px;
+}
+.inputWrapper input{
+    width: 80%;
+}
+.inputWrapper span{
+    margin-left: 20%;
+    color: #f01f30;
+}

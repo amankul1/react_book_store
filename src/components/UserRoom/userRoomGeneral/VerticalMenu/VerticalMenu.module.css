@@ -1,0 +1,59 @@
+.menuWrapper{
+    padding: 50px 0;
+    background: #EBEFF2;
+}
+.imageWrapper{
+    margin: auto;
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+.userImage{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.changeUserImageIcon{
+    position: absolute;
+    margin-top: 70%;
+    margin-left: 80%;
+    cursor: pointer;
+}
+.menuList{
+    width: 100%;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+}
+.menuList ul{
+    list-style: none;
+    width: 50%;
+    color: #732C9F;
+}
+.menuList ul a{
+    text-decoration: none;
+}
+.menuList ul li{
+    height: 30px;
+    width: 100%;
+    padding: 2px 5px;
+    cursor: pointer;
+}
+.menuList ul li:hover{
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,.3);
+}
+.active{
+    color: #282c34;
+    font-weight: bold;
+}
+.userRole{
+    width: 100%;
+    font-weight: bold;
+    color: #33485D;
+}
+.userRole div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

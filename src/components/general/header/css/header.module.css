@@ -30,9 +30,39 @@
 .authorizationLinksWrapper{
     display: flex;
     justify-content: space-around;
+    align-items: center;
+}
+.authorizationLinksWrapper img{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 5px;
 }
 .vl{
     margin: 5px;
     border: 1px solid rgba(0,0,0,0.5);
     transform: rotateZ(20deg);
+}
+.userRoomDropDownMenu{
+    background: rgba(255,255,255, 0.1);
+    border-radius: 3px;
+}
+.dropDownItem{
+    width: 100%;
+    padding: 3px 5px;
+    cursor: pointer;
+    color: rgba(0,0,0,.8);
+}
+.dropDownItem:hover{
+    box-shadow: 2px 2px 2px  2px rgba(0,0,0,0.3);
+}
+.headerItemsWrapper a{
+    text-decoration: none;
+    color: #4F0A0A;
+    font-weight: bold;
+}
+.dropDownItem a{
+    text-decoration: none;
+    color: rgba(0,0,0,.8);
+    font-weight: normal;
 }
