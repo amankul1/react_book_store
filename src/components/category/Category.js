@@ -3,9 +3,10 @@ import HeaderComponent from "../general/header/HeaderComponent";
 import MenuComponent from "../general/menu/MenuComponent";
 import FooterComponent from "../general/footer/FooterComponent";
 import CategoryContent from "../category/CategoryContent/CategoryContent";
-import axios from "axios";
+import {getAxios} from "../withAxios/withAxios";
 
 class  Category extends React.Component{
+    myAxios;
 
     constructor(props) {
         super(props);
@@ -20,30 +21,6 @@ class  Category extends React.Component{
                     },
                     {
                         id:2,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:3,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:4,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:5,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:6,
                         name: "Karl Mark",
                         author: "KAZUO ISHIGURO",
                         image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
@@ -64,15 +41,18 @@ class  Category extends React.Component{
     }
 
     async componentDidMount() {
+        this.myAxios = getAxios();
         try{
-            const response =  await axios.get('http://pj-bookstore.herokuapp.com/category');
+            const response =  await this.myAxios.get('/category');
             let arr = [];
-            response.data.forEach((item)=>{
-                arr.push({name: item.name})
-            })
-            const tempState = {...this.state}
-            tempState.genders = arr;
-            this.setState(tempState);
+            if(response.data.length > 0){
+                response.data.forEach((item)=>{
+                    arr.push({name: item.name})
+                })
+                const tempState = {...this.state}
+                tempState.genders = arr;
+                this.setState(tempState);
+            }
         }catch (e){
             alert("What went wrong !")
         }

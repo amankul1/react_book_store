@@ -4,7 +4,7 @@ export function withStore(AppComponent){
     return class withApp extends React.Component{
         state = {
             store: {
-                userId: null,
+                userId: 1,
                 isLogin: false,
                 userToken: '',
                 userEmail: '',

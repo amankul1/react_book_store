@@ -1,7 +1,7 @@
 import './App.css';
 import "fontsource-roboto";
 import React from "react";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 import Registration from "./components/userAuthorization/registration/Registration";
 import Authentication from "./components/userAuthorization/authentication/Authentication";
 import Books from "./components/books/Books";
@@ -15,7 +15,7 @@ import AboutWriter from "./components/AboutWriter/AboutWriter";
 import UserRoomAboutMe from "./components/UserRoom/UserRoomAboutMe/UserRoomAboutMe";
 import UserRoomMyBooks from "./components/UserRoom/UserRoomMyBooks/UserRoomMyBooks";
 import ActivateAccount from "./components/userAuthorization/ActivateAccount /ActivateAccount";
-import UserRoomAddBook from "./components/UserRoom/UserRoomAddBook/UserRoomAddBook";
+import ChangeImage from "./components/general/ChangeImage/ChangeImage";
 
 import {withStore} from "./hoc/Store/Store";
 
@@ -45,19 +45,20 @@ function App(props) {
                     <Route path={"/change-password"} component={ChangePassword}/>
                     <Route path={"/book/author/:id"}  component={AboutWriter}/>
                     <Route path="/user/room/about/me"  component={UserRoomAboutMe} />
-                    {props.store.role==='writer' ?
+
+                    <Route path="/change/image/:type" component={ChangeImage}/>
+                    {props.store.role==='writer' || props.store.role==='moderator'?
                         <>
                             <Route path="/user/room/my/books"  component={UserRoomMyBooks} />
-                            <Route path="/user/room/add/book"  component={UserRoomAddBook} />
                         </> : null
                     }
                     <Route path="/user/account/activate" component={ActivateAccount}/>
-                    <Route render={()=><h1>Error 404</h1>}/>
+                    <Redirect to='/'/>
 
                 </Switch>
             </userContext.Provider>
         </>
-  );
+    );
 }
 
 export default withStore(App);

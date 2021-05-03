@@ -16,11 +16,7 @@ class  Authors extends React.Component{
     }
 
     searchChangeHandle = (text)=>{
-        this.setState((prevState)=>{
-            return(
-                {searchText: text}
-            )
-        })
+        this.setState({searchText: text})
         console.log(this.state.searchText);
     }
 

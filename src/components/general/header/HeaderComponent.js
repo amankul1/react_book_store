@@ -41,6 +41,7 @@ const HeaderComponent = (props)=>{
                             value={props.searchText}
                             onChange={(event)=>{props.searchChangeHandler(event.target.value)}}
                         />
+                        <button className='btn btn-primary'>Search</button>
                     </Box>
                 </Grid>
                 <Grid className={classes.headerItemsWrapper} item xs={3}>

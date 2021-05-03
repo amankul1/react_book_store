@@ -7,7 +7,8 @@ import {userContext} from "../../../App";
 import {Redirect} from "react-router-dom";
 import InputUI from "../UserRoomUI/InputUI/InputUI";
 import TextAreaUI from "../UserRoomUI/TextAreaUI/TextAreaUI";
-import axios from "axios";
+import {anotherAxios} from "../../withAxios/withAxios";
+
 
 const UserRoomAboutMe = () =>{
 
@@ -28,21 +29,31 @@ const UserRoomAboutMe = () =>{
     const [newPasswordValid, setNewPasswordValid] = useState(false);
     const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
 
+    let newAxios = anotherAxios(myContext.store.userToken);
 
     useLayoutEffect( ()=>{
         if(myContext.store.role === 'reader'){
 
-            let url = 'http://pj-bookstore.herokuapp.com/user/email/'+myContext.store.userEmail;
-            const response =  axios.get(url).
-                then(response=>{
-                console.log(response.data);
+            let url = '/user/email/'+myContext.store.userEmail;
+
+            const response =  newAxios.get(url).
+            then(response=>{
+               const [n, sn] = response.data.name.split(' ');
+                setName(n);
+                setSurName(sn);
+                if(n.length > 0){
+                    setNameValid(true);
+                }
+                if(sn.length > 0){
+                    setSurNameValid(true);
+                }
             }).catch(e=>{
                 console.log(e);
             })
 
         }else if(myContext.store.role === 'writer'){
-            let url = 'http://pj-bookstore.herokuapp.com/author/'+myContext.store.userId;
-            const response =  axios.get(url).
+            let url = '/author/'+myContext.store.userId;
+            const response =  newAxios.get(url).
             then(response=>{
                 if(response.data.name){
                     const [n, sn] = response.data.name.split(' ');
@@ -70,7 +81,7 @@ const UserRoomAboutMe = () =>{
             }).catch(e=>{
                 console.log(e);
             })
-        }else if(myContext.store.role === ''){
+        }else if(myContext.store.role === 'moderator'){
 
         }
     }, [])
@@ -117,7 +128,7 @@ const UserRoomAboutMe = () =>{
         switch (type){
             case 'old':
                 setOldPassword(e.target.value);
-                if(e.target.value.length > 7 && e.target.value.length < 13){
+                if(e.target.value.length > 4 && e.target.value.length < 13){
                     setOldPasswordValid(true);
                 }else{
                     setOldPasswordValid(false);
@@ -125,7 +136,7 @@ const UserRoomAboutMe = () =>{
                 break;
             case 'new':
                 setNewPassword(e.target.value);
-                if(e.target.value.length > 7 && e.target.value.length < 13){
+                if(e.target.value.length > 4 && e.target.value.length < 13){
                     setNewPasswordValid(true);
                 }else{
                     setNewPasswordValid(false);
@@ -146,51 +157,57 @@ const UserRoomAboutMe = () =>{
     const userProfileHandler = async (e)=>{
         e.preventDefault();
 
-        // try{
-        //     const response = await axios({
-        //         method: 'put',
-        //         url: 'http://pj-bookstore.herokuapp.com/user/profile',
-        //         data: {
-        //             'name': name,
-        //             'surname': surName
-        //         },
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     })
-        //
-        //
-        // }catch (e){
-        //
-        // }
+        try{
+            const response = await newAxios.put('/user/profile', {
+                    'name': name,
+                    'surname': surName
+                })
+            const [n, sn] = response.data.name.split(' ');
+            setName(n);
+            setSurName(sn);
+            alert("Your profile info was changed !")
+        }catch (e){
+            console.log(e);
+        }
 
     }
 
     const authorProfileHandler = async (e) =>{
         e.preventDefault();
-        // try{
-        //     const response = await axios({
-        //         method: 'put',
-        //         url: '',
-        //         data: {
-        //             'name': name,
-        //             'surname': surName,
-        //             'type': '',
-        //             'birthDate': '',
-        //             'biography': ''
-        //         },
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     })
-        // }catch (e){
-        //
-        // }
+        try{
+            const userName = name + ' ' +surName;
+            const response = await newAxios.put(`/author/${myContext.store.userId}`, {
+                    'name': userName,
+                    'birthDate': birthDay,
+                    'biography': biography
+                })
+            const [n, sn] = response.data.name.split(' ');
+            console.log(response.data);
+        }catch (e){
+
+        }
     }
 
-    const passwordChangeHandler = (e)=>{
+    const passwordChangeHandler = async (e)=>{
         e.preventDefault();
-
+        try{
+            const userName = name + ' ' +surName;
+            const response = await newAxios.put(`/user/password`, {
+                'email': myContext.store.userEmail,
+                'oldPassword': oldPassword,
+                'newPassword': newPassword
+            })
+            const [n, sn] = response.data.name.split(' ');
+            setConfirmPassword('');
+            setNewPassword('');
+            setOldPassword('');
+            setOldPasswordValid(false);
+            setNewPasswordValid(false);
+            setConfirmPasswordValid(false);
+            alert("Your password was changed !")
+        }catch (e){
+            alert(e.message);
+        }
     }
         if(myContext.store.isLogin){
             return(
@@ -243,7 +260,7 @@ const UserRoomAboutMe = () =>{
                                 </form>
                             </>:
 
-                                myContext.store.role==='reader'?
+                                myContext.store.role==='reader' || myContext.store.role=== "moderator"?
                                     <>
                                         <form className={classes.personalInfo}>
                                             <div>

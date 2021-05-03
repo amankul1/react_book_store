@@ -58,7 +58,8 @@ function Authentication(){
                     headers: {
                         'Content-Type': 'application/json'
                     }
-                })
+                });
+                console.log(response.data.token);
                 if(response.status === 200){
                     try{
                         let url = 'http://pj-bookstore.herokuapp.com/user/email/'+email;
@@ -66,6 +67,7 @@ function Authentication(){
                         setIsLogin(true);
                         myContext.setUserToken(response.data.token);
                         myContext.setUserId(res.data.id);
+                        console.log(res.data.id);
                         myContext.setUserEmail(res.data.email);
                         myContext.setUserRole(res.data.occupation);
                         myContext.setIsLogin(true);

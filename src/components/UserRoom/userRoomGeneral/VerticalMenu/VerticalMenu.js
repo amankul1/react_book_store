@@ -10,7 +10,9 @@ const VerticalMenu = ( props )=>{
         <div className={classes.menuWrapper}>
             <div className={classes.imageWrapper}>
                 <img className={classes.userImage} src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" onClick={()=>{setIsClicked(!isClicked)}} alt=''/>
-                {isClicked ? <img className={classes.changeUserImageIcon} src={changeImageIcon} alt=''/> : null}
+                {isClicked ?
+                    <NavLink to="/change/image/user" exact> <img className={classes.changeUserImageIcon} src={changeImageIcon} alt=''/> </NavLink>
+                    : null}
             </div>
             <div className={classes.userRole}>
                 <div>
@@ -24,10 +26,13 @@ const VerticalMenu = ( props )=>{
                 <ul>
                     <NavLink activeClassName={classes.active} to="/user/room/about/me" exact > <li >About me</li> </NavLink>
                     {
-                        props.role === 'writer' ? <>
+                        props.role === 'writer' ?
                             <NavLink activeClassName={classes.active} to="/user/room/my/books" exact > <li>My books</li> </NavLink>
-                            <NavLink activeClassName={classes.active} to="/user/room/add/book" exact > <li>Add book</li> </NavLink>
-                        </> : null
+                            : props.role === 'moderator' ?
+                            <NavLink activeClassName={classes.active} to="/user/room/my/books" exact > <li>Books</li> </NavLink>
+                            :
+                            null
+
                     }
                 </ul>
             </div>

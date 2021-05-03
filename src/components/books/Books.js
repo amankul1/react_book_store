@@ -49,9 +49,10 @@ class  Books extends React.Component{
                     }
                 ],
             tops:[
-                {name: "Popular books"},
-                {name: "Popular books"},
-                {name: "Popular books"}
+                {name: "By date"},
+                {name: "By name"},
+                {name: "By author"},
+                {name: "By rating"}
             ]
 
         }
@@ -78,7 +79,6 @@ class  Books extends React.Component{
                     searchChangeHandler={this.searchChangeHandle}
                 />
                 <MenuComponent/>
-
                 <BooksContent
                     onClick={this.subMenuHandler}
                     books = {this.state.books}
