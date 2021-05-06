@@ -36,7 +36,7 @@ const UserRoomAboutMe = () =>{
 
             let url = '/user/email/'+myContext.store.userEmail;
 
-            const response =  newAxios.get(url).
+            newAxios.get(url).
             then(response=>{
                const [n, sn] = response.data.name.split(' ');
                 setName(n);
@@ -53,7 +53,7 @@ const UserRoomAboutMe = () =>{
 
         }else if(myContext.store.role === 'writer'){
             let url = '/author/'+myContext.store.userId;
-            const response =  newAxios.get(url).
+            newAxios.get(url).
             then(response=>{
                 if(response.data.name){
                     const [n, sn] = response.data.name.split(' ');
@@ -106,7 +106,7 @@ const UserRoomAboutMe = () =>{
                 break;
             case 'biography':
                 setBiography(e.target.value);
-                if(e.target.value.length > 0 && e.target.value.length < 200){
+                if(e.target.value.length > 0 && e.target.value.length < 250){
                     setBiographyValid(true);
                 }else{
                     setBiographyValid(false);
@@ -182,9 +182,13 @@ const UserRoomAboutMe = () =>{
                     'biography': biography
                 })
             const [n, sn] = response.data.name.split(' ');
-            console.log(response.data);
+            setName(n);
+            setSurName(sn);
+            setBirthday(response.data.birthDate);
+            setBiography(response.data.biography);
+            alert("Writer data was changed !")
         }catch (e){
-
+            console.log(e.message);
         }
     }
 

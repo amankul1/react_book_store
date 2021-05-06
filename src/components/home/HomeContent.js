@@ -55,19 +55,33 @@ const HomeContent  = (props)=> {
 
                 <div style={style.contentWrapper}>
                 <div style={style.content}>
-                    {
-                        props.content.genders.map((item, index) => {
-                            return (
-                                <div key={index} style={style.contentBlocks}>
-                                    <div style={style.contentBlocksTitle}>{item.name}</div>
-                                    <div style={style.carouselBooksWrapper}>
-                                        <BooksCarousel books={item.books}/>
-                                    </div>
-                                </div>
 
-                            )
-                        })
-                    }
+                    <div style={style.contentBlocks}>
+                        <div style={style.contentBlocksTitle}>{props.oldBooks.title}</div>
+                        {
+                            (props.oldBooks.books.length > 0) ?
+                                <div style={style.carouselBooksWrapper}>
+                                    <BooksCarousel books={props.oldBooks.books}/>
+                                </div> :
+                                <div style={style.carouselBooksWrapper}>
+                                    <h3> Loading ... </h3>
+                                </div>
+                        }
+                    </div>
+
+                    <div style={style.contentBlocks}>
+                        <div style={style.contentBlocksTitle}>{props.newBooks.title}</div>
+                        {
+                            (props.newBooks.books.length > 0) ?
+                                <div style={style.carouselBooksWrapper}>
+                                    <BooksCarousel books={props.newBooks.books}/>
+                                </div> :
+                                <div style={style.carouselBooksWrapper}>
+                                    <h3> Loading ... </h3>
+                                </div>
+                        }
+                    </div>
+
                 </div>
                     <div style={style.reklama}>
                         Reclama

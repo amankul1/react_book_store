@@ -16,7 +16,8 @@ import UserRoomAboutMe from "./components/UserRoom/UserRoomAboutMe/UserRoomAbout
 import UserRoomMyBooks from "./components/UserRoom/UserRoomMyBooks/UserRoomMyBooks";
 import ActivateAccount from "./components/userAuthorization/ActivateAccount /ActivateAccount";
 import ChangeImage from "./components/general/ChangeImage/ChangeImage";
-
+import ActivateInfo from "./components/userAuthorization/ActivateAccount /ActivateInfo";
+import ModeratorRegister from "./components/userAuthorization/ModeratorRegister/ModeratorRegister";
 import {withStore} from "./hoc/Store/Store";
 
 export const userContext = React.createContext({});
@@ -52,7 +53,9 @@ function App(props) {
                             <Route path="/user/room/my/books"  component={UserRoomMyBooks} />
                         </> : null
                     }
-                    <Route path="/user/account/activate" component={ActivateAccount}/>
+                    <Route path="/user/account/activate/info" component={ActivateInfo}/>
+                    <Route path="/user/account/activate/:code" component={ActivateAccount}/>
+                    <Route path="/moderator/registration" component={ModeratorRegister} />
                     <Redirect to='/'/>
 
                 </Switch>

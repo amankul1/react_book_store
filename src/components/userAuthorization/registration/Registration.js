@@ -90,7 +90,7 @@ function Registration() {
 
     if(registrationSuccess){
         return(
-            <Redirect to="/user/account/activate"/>
+            <Redirect to="/user/account/activate/info" exact />
         )
     } else{
         return (

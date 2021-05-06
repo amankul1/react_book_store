@@ -17,7 +17,7 @@ const CategoryContent = (props)=>{
             <div className={classes.CategoryContent}>
 
                 <div className={classes.CategoryContentTitle}>
-                    GenderName
+                    {props.activeGender}
                 </div>
 
                 {props.books.map((book, index)=>{

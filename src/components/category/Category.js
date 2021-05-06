@@ -4,6 +4,7 @@ import MenuComponent from "../general/menu/MenuComponent";
 import FooterComponent from "../general/footer/FooterComponent";
 import CategoryContent from "../category/CategoryContent/CategoryContent";
 import {getAxios} from "../withAxios/withAxios";
+import axios from "axios";
 
 class  Category extends React.Component{
     myAxios;
@@ -12,6 +13,7 @@ class  Category extends React.Component{
         super(props);
         this.state = {
             searchText: '',
+            activeGender: '',
                 books:[
                     {
                         id:1,
@@ -51,15 +53,23 @@ class  Category extends React.Component{
                 })
                 const tempState = {...this.state}
                 tempState.genders = arr;
+                tempState.activeGender = arr[0].name;
                 this.setState(tempState);
+                try{
+                    const res = await axios()
+                }catch (err){
+
+                }
             }
         }catch (e){
             alert("What went wrong !")
         }
     }
 
-    subMenuHandler(name){
-        alert(name);
+    subMenuHandler = (name)=>{
+        let st = {...this.state};
+        st.activeGender = name;
+        this.setState(st);
     }
 
     render() {
@@ -75,6 +85,7 @@ class  Category extends React.Component{
                     onClick={this.subMenuHandler}
                     books = {this.state.books}
                     genders = {this.state.genders}
+                    activeGender = {this.state.activeGender}
                 />
 
                 <FooterComponent/>
