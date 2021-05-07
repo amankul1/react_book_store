@@ -67,9 +67,13 @@ class  Category extends React.Component{
     }
 
     subMenuHandler = (name)=>{
-        let st = {...this.state};
-        st.activeGender = name;
-        this.setState(st);
+        try{
+            let st = {...this.state};
+            st.activeGender = name;
+            this.setState(st);
+        }catch (e){
+            alert(e.message);
+        }
     }
 
     render() {

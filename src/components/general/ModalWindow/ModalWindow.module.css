@@ -1,0 +1,37 @@
+.modalWindow{
+    position: fixed;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #EBEFF2;
+}
+.infoBox{
+    width: 350px;
+    height: 200px;
+    box-shadow: 2px 2px 2px 2px rgba(255,255,255,0.8);
+    border-radius: 5px;
+}
+.informationWrapper{
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.8);
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.informationWrapper img{
+    cursor: pointer;
+}
+.content{
+    width: 100%;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}

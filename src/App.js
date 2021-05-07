@@ -41,10 +41,10 @@ function App(props) {
                     <Route path="/books" component={Books}/>
                     <Route path="/category" component={Category}/>
                     <Route path="/authors" component={Authors}/>
-                    <Route path="/book/info/:bookId" component={BookInfo}/>
+                    <Route path="/book/info/:id" component={BookInfo}/>
                     <Route path="/forget-password" component={ForgotPassword}/>
-                    <Route path={"/change-password"} component={ChangePassword}/>
-                    <Route path={"/book/author/:id"}  component={AboutWriter}/>
+                    <Route path="/change-password" component={ChangePassword}/>
+                    <Route path="/book/author/:id"  component={AboutWriter}/>
                     <Route path="/user/room/about/me"  component={UserRoomAboutMe} />
 
                     <Route path="/change/image/:type" component={ChangeImage}/>
