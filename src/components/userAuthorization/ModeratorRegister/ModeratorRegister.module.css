@@ -1,0 +1,27 @@
+.moderatorRegister{
+    width: 100%;
+    height: 100vh;
+    background:  linear-gradient(9deg, #fd8355 0%, #f0576c 37%, #f79cbd 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.moderatorRegister form{
+    width: 40%;
+    background: #EBEFF2;
+    border-radius: 5px;
+    padding: 10px 8px 20px 8px;
+}
+
+.moderatorRegister form button{
+    width: 100px;
+    height: 38px;
+    margin-left: 78%;
+}
+
+.formTitle{
+    height: 40px;
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+}

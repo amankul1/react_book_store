@@ -17,18 +17,29 @@ const BooksContent = (props)=>{
             <div className={classes.CategoryContent}>
 
                 <div className={classes.CategoryContentTitle}>
-                    GenderName
+                    {
+                        props.title
+                    }
                 </div>
 
-                {props.books.map((book, index)=>{
-                    return(
-                        <NavLink to={`/book/info/${book.id}`} key={index}>
-                            <BookCard
-                                list={book}
-                            />
-                        </NavLink>
-                    )
-                })}
+                {
+                    (props.books.length>0)?
+                        <>
+                            {
+                                props.books.map((book, index)=>{
+                                    return(
+                                        <NavLink to={`/book/info/${book.id}`} key={index}>
+                                            <BookCard
+                                                list={book}
+                                            />
+                                        </NavLink>
+                                    )
+                                })
+                            }
+                        </>
+                        :
+                        "Loading ..."
+                }
             </div>
             <div className={classes.CategoryAdvertisingWrapper}>
                 Reclama

@@ -3,83 +3,76 @@ import HeaderComponent from "../general/header/HeaderComponent";
 import MenuComponent from "../general/menu/MenuComponent";
 import FooterComponent from "../general/footer/FooterComponent";
 import BooksContent from "./BooksContent/BooksContent";
+import axios from "axios";
+import book_image from "../UserRoom/UserRoomIcons/default_book_image.png"
 
 class  Books extends React.Component{
 
     constructor(props) {
         super(props);
         this.state = {
-            searchText: '',
-                books:[
-                    {
-                        id:1,
-                        name: "Karl Mark dfsvsd asdfvsd",
-                        author: "KAZUO ISHIGUROs sdfsdf sdfv",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:2,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:3,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:4,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:5,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:6,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    }
-                ],
+            books:[],
             tops:[
                 {name: "By date"},
                 {name: "By name"},
                 {name: "By author"},
                 {name: "By rating"}
-            ]
-
+            ],
+            activeTitle: 'All books'
         }
     }
 
-    searchChangeHandle = (text)=>{
-        this.setState((prevState)=>{
-            return(
-                {searchText: text}
-            )
-        })
-        console.log(this.state.searchText);
+    componentDidMount() {
+        let arr=[];
+        axios.get('https://pj-bookstore.herokuapp.com/book').then(
+            response =>{
+                if(response.data.length > 0){
+                    response.data.forEach((item)=>{
+                        arr.push({
+                            id: item.id,
+                            name: item.name,
+                            author: item.author?item.author.name: "No name",
+                            image: item.image?item.image.url: book_image
+                        });
+                        this.setState({books: arr})
+                    })
+                }else{
+                    this.setState({books: []})
+                }
+            }
+        ).catch(
+            e=>{
+                alert(e.message);
+            }
+        )
     }
 
-    subMenuHandler(name){
-        alert(name);
+
+    subMenuHandler = (active) => {
+        let type = active.toLowerCase();
+        switch (type) {
+            case 'by date':
+                this.setState({activeTitle: active});
+                break;
+            case 'by name':
+                this.setState({activeTitle: active});
+                break;
+            case 'by author':
+                this.setState({activeTitle: active});
+                break;
+            case 'by rating':
+                this.setState({activeTitle: active});
+                break;
+        }
     }
 
     render() {
         return(
             <div>
-                <HeaderComponent
-                    searchText={this.state.searchText}
-                    searchChangeHandler={this.searchChangeHandle}
-                />
+                <HeaderComponent/>
                 <MenuComponent/>
                 <BooksContent
+                    title={this.state.activeTitle}
                     onClick={this.subMenuHandler}
                     books = {this.state.books}
                     genders = {this.state.tops}

@@ -10,6 +10,7 @@ import {userContext} from "../../../App";
 const HeaderComponent = (props)=>{
     const myContext = useContext(userContext);
     const [isDrop, setIsDrop] = useState(false);
+    const [searchText, setSearchText] = useState('');
 
     const dropHandler = ()=>{
         setIsDrop(!isDrop);
@@ -20,6 +21,10 @@ const HeaderComponent = (props)=>{
         myContext.setIsLogin(false);
         myContext.setUserEmail('');
         myContext.setUserToken('');
+    }
+
+    const searchChangeHandler = (e)=>{
+        setSearchText(e.target.value);
     }
 
     return (
@@ -38,8 +43,8 @@ const HeaderComponent = (props)=>{
                             rowsMax={1}
                             placeholder="Enter book name"
                             multiline
-                            value={props.searchText}
-                            onChange={(event)=>{props.searchChangeHandler(event.target.value)}}
+                            value={searchText}
+                            onChange={searchChangeHandler}
                         />
                         <button className='btn btn-primary'>Search</button>
                     </Box>
@@ -48,7 +53,7 @@ const HeaderComponent = (props)=>{
                     {
                         myContext.store.isLogin?
                             <Box component="div" className={classes.authorizationLinksWrapper}>
-                                <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" alt=''/>
+                                <img src={myContext.store.image} alt=''/>
                                 <div className={classes.userRoomDropDownMenu}>
                                     <div className={classes.dropDownItem} onClick={dropHandler}>{myContext.store.userEmail}</div>
                                     {

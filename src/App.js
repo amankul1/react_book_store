@@ -15,10 +15,11 @@ import AboutWriter from "./components/AboutWriter/AboutWriter";
 import UserRoomAboutMe from "./components/UserRoom/UserRoomAboutMe/UserRoomAboutMe";
 import UserRoomMyBooks from "./components/UserRoom/UserRoomMyBooks/UserRoomMyBooks";
 import ActivateAccount from "./components/userAuthorization/ActivateAccount /ActivateAccount";
-import ChangeImage from "./components/general/ChangeImage/ChangeImage";
+import ChangeUserImage from "./components/general/ChangeUserImage/ChangeUserImage";
 import ActivateInfo from "./components/userAuthorization/ActivateAccount /ActivateInfo";
 import ModeratorRegister from "./components/userAuthorization/ModeratorRegister/ModeratorRegister";
 import {withStore} from "./hoc/Store/Store";
+import AuthorBooks from "./components/AuthorBooks/AuthorBooks";
 
 export const userContext = React.createContext({});
 
@@ -31,7 +32,8 @@ function App(props) {
                 setUserToken: props.setUserToken,
                 setUserEmail: props.setUserEmail,
                 setUserRole: props.setUserRole,
-                setUserId: props.setUserId
+                setUserId: props.setUserId,
+                setImage: props.setImage
             }}>
                 <Switch>
                     <Route path='/registration' component={Registration}/>
@@ -46,8 +48,8 @@ function App(props) {
                     <Route path="/change-password" component={ChangePassword}/>
                     <Route path="/book/author/:id"  component={AboutWriter}/>
                     <Route path="/user/room/about/me"  component={UserRoomAboutMe} />
-
-                    <Route path="/change/image/:type" component={ChangeImage}/>
+                    <Route path="/author/books/:id" component={AuthorBooks} />
+                    <Route path="/change/user/image" component={ChangeUserImage}/>
                     {props.store.role==='writer' || props.store.role==='moderator'?
                         <>
                             <Route path="/user/room/my/books"  component={UserRoomMyBooks} />

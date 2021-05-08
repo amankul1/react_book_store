@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./AuthorsContent.module.css";
-import BookCard from "../../general/BookCard/BookCard";
+import AuthorCard from "../../general/AuthorCard/AuthorCard";
 import {NavLink} from "react-router-dom";
 
 const AuthorsContent = (props)=>{
@@ -16,16 +16,16 @@ const AuthorsContent = (props)=>{
 
                         {props.authors.map((author, index)=>{
                             return(
-                                <NavLink to={`/book/info/${author.id}`} key={index}>
-                                    <BookCard
-                                        list={author}
+                                <NavLink to={`/author/books/${author.id}`} key={index}>
+                                    <AuthorCard
+                                        name={author.name}
+                                        image={author.image}
                                     />
-
                                 </NavLink>
                             )
                         })}
                     </>:
-                    null
+                    "Loading ..."
                 }
             </div>
             <div className={classes.CategoryAdvertisingWrapper}>

@@ -12,7 +12,6 @@ class  Category extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            searchText: '',
             activeGender: '',
                 books:[
                     {
@@ -31,15 +30,6 @@ class  Category extends React.Component{
             genders:[]
 
         }
-    }
-
-    searchChangeHandle = (text)=>{
-        this.setState((prevState)=>{
-            return(
-                {searchText: text}
-            )
-        })
-        console.log(this.state.searchText);
     }
 
     async componentDidMount() {
@@ -79,10 +69,7 @@ class  Category extends React.Component{
     render() {
         return(
             <div>
-                <HeaderComponent
-                    searchText={this.state.searchText}
-                    searchChangeHandler={this.searchChangeHandle}
-                />
+                <HeaderComponent/>
                 <MenuComponent/>
 
                 <CategoryContent

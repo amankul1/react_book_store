@@ -3,6 +3,7 @@ import HeaderComponent from "../general/header/HeaderComponent";
 import MenuComponent from "../general/menu/MenuComponent";
 import FooterComponent from "../general/footer/FooterComponent";
 import AuthorsContent from "./AuthorsContent/AuthorsContent";
+import author_image from '../UserRoom/UserRoomIcons/author_image.png'
 import axios from "axios";
 
 class  Authors extends React.Component{
@@ -10,30 +11,30 @@ class  Authors extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            searchText: '',
             authors: []
         }
     }
 
-    searchChangeHandle = (text)=>{
-        this.setState({searchText: text})
-        console.log(this.state.searchText);
-    }
+    componentDidMount() {
 
-    async componentDidMount() {
-        try{
-            const response =  await axios.get('http://pj-bookstore.herokuapp.com/author');
-            let arr = [];
-            response.data.forEach((item)=>{
-                arr.push({id: item.id, name: item.name, image: item.image})
-            })
-            const tempState = {...this.state}
-            tempState.authors = arr;
-            this.setState(tempState);
+        axios.get('http://pj-bookstore.herokuapp.com/author').then(
+            response=>{
+                let arr = [];
+                if(response.data.length>0){
+                    response.data.forEach((item)=>{
+                        arr.push({
+                            id: item.id,
+                            name: item.name,
+                            image: item.image?item.image.url: author_image
+                        })
+                    })
+                }
+                this.setState({authors: arr});
+            }
+        ).catch(e=>{
+            alert(e.message);
+        })
 
-        }catch (e){
-            alert("What went wrong !")
-        }
     }
 
     subMenuHandler(name){
@@ -43,10 +44,7 @@ class  Authors extends React.Component{
     render() {
         return(
             <div>
-                <HeaderComponent
-                    searchText={this.state.searchText}
-                    searchChangeHandler={this.searchChangeHandle}
-                />
+                <HeaderComponent/>
                 <MenuComponent/>
 
                 <AuthorsContent

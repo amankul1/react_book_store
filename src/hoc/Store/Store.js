@@ -8,7 +8,8 @@ export function withStore(AppComponent){
                 isLogin: false,
                 userToken: '',
                 userEmail: '',
-                role: ''
+                role: '',
+                image: ''
             }
         }
 
@@ -39,6 +40,12 @@ export function withStore(AppComponent){
             this.setState(state);
         }
 
+        setImage = (image)=>{
+            const state = this.state;
+            state.store.image = image;
+            this.setState(state);
+        }
+
         render() {
             return(
                 <AppComponent
@@ -48,6 +55,7 @@ export function withStore(AppComponent){
                     setUserEmail={this.setUserEmail}
                     setUserRole = {this.setUserRole}
                     setUserId = {this.setUserID}
+                    setImage={this.setImage}
                     {...this.props}
                 />
             )

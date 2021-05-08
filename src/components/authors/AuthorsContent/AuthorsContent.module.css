@@ -10,6 +10,9 @@
     justify-content: space-around;
     flex-wrap: wrap;
 }
+.CategoryContent a{
+    text-decoration: none;
+}
 .CategoryAdvertisingWrapper{
     width: 15%;
     padding: 30px;

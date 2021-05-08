@@ -22,7 +22,13 @@ const BookCard = (props)=>{
                     </Typography>
                     {props.list.author ?
                         <Typography gutterBottom variant="h6" component="h6">
-                            {props.list.name}
+                            {props.list.author}
+                        </Typography> :
+                        null
+                    }
+                    {props.list.rating ?
+                        <Typography gutterBottom variant="h6" component="h6">
+                            Rating: {props.list.rating}
                         </Typography> :
                         null
                     }

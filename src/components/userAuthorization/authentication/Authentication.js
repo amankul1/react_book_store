@@ -5,6 +5,7 @@ import books_image from "../authorizationImages/booksImage.jpg";
 import {NavLink, Redirect} from "react-router-dom";
 import axios from "axios";
 import {userContext} from "../../../App";
+import author_image from "../../UserRoom/UserRoomIcons/author_image.png";
 
 function Authentication(){
 
@@ -67,8 +68,9 @@ function Authentication(){
                         myContext.setUserToken(response.data.token);
                         myContext.setUserId(res.data.id);
                         myContext.setUserEmail(res.data.email);
-                        myContext.setUserRole(res.data.occupation);
+                        myContext.setUserRole(res.data.occupation.toLowerCase());
                         myContext.setIsLogin(true);
+                        myContext.setImage(res.data.image?res.data.image.url:author_image);
                     }catch (e) {
                         alert("Error, try again !");
                     }

@@ -7,14 +7,12 @@ function ActivateAccount({match, location}){
     const myAxios = getAxios();
     const [userRole, setUserRole] = useState('');
 
-    async function sendHandler(e){
+    const  sendHandler = async (e) =>{
         e.preventDefault();
         if(match.params.code.length > 0){
-            let url = `http://pj-bookstore.herokuapp.com/${match.params.code}`;
             try{
-                const response = await myAxios.get(url);
+                const response = await myAxios.get(`http://pj-bookstore.herokuapp.com/register/activate/${match.params.code}`);
                 setUserRole(response.data.role);
-                alert(response.data.message);
             }catch (e){
                 alert("Something went wrong repeat the process !")
             }
@@ -32,11 +30,15 @@ function ActivateAccount({match, location}){
                 </form>
             </div>
         )
-    }else if(userRole==='reader' || userRole==='writer'){
+    }else if(userRole==='ROLE_WRITER'){
         return(
-            <Redirect to="/authentication"/>
+            <Redirect to="/authentication" exact/>
         )
-    }else if(userRole==='moderator'){
+    }else if(userRole==='ROLE_READER'){
+        return(
+            <Redirect to="/authentication" exact/>
+        )
+    }else if(userRole==='ROLE_MODERATOR'){
         return(
             <Redirect to="/moderator/registration" exact/>
         )
