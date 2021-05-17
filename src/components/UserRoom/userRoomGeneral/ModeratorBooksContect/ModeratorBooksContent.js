@@ -20,7 +20,7 @@ const ModeratorBooksContent = (props) =>{
                                     <li key={index}>
                                         <div className={classes.bookNumber}>{index + 1}.</div>
                                         <div className={classes.bookName}>{item.name}</div>
-                                        <div className={classes.authorName}>{item.author}  </div>
+                                        <div className={classes.authorName}>{item.author.name}  </div>
                                         <div className={classes.controlIcons}>
                                             <img src={bookDownloadIcon} alt=""/>
                                             <img src={okIcon} onClick={()=>{props.approveBook(item.id)}} alt=""/>

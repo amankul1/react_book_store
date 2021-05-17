@@ -1,0 +1,9 @@
+.pageWrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+.AdminInfoContent{
+    width: 80%;
+    padding: 50px 5%;
+    background-color: #EBEFF2;
+}

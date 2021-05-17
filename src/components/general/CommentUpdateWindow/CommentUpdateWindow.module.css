@@ -1,0 +1,31 @@
+.modalWindow{
+    position: fixed;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.modalWindow form{
+    width: 40%;
+    padding: 30px 20px;
+    background-color: #EBEFF2;
+    border-radius: 5px;
+}
+.modalWindow form div{
+    width: 100%;
+    margin-bottom: 15px;
+}
+.modalWindow form div label{
+    width: 100%;
+}
+.modalWindow form div input{
+    width: 100%;
+}
+.modalWindow form button{
+    margin-left: 25px;
+}

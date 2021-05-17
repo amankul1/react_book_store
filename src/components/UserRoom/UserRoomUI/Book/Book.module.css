@@ -55,13 +55,30 @@
     display: flex;
 }
 
-.bookDown .bookImage{
-    width: 25%;
-}
 .bookDown .bookComments{
-    width: 75%;
+    width: 100%;
 }
 .opened{
     transform: scaleX(0);
     transform-origin: top;
+}
+.bookComments{
+    width: 100%;
+    display: flex;
+    font-size: 12px;
+}
+.bookComments .commentUserName{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+.bookComments div{
+    width: 65%;
+    display: flex;
+    justify-content: center;
+}
+.bookComments span{
+    width: 10%;
+    display: flex;
+    justify-content: center;
 }

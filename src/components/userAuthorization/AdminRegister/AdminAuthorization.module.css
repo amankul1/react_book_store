@@ -1,0 +1,35 @@
+.adminAuthorization{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(85deg, #fb63f9, #c2e534);
+}
+.adminAuthorization form{
+    width: 35%;
+    padding: 30px 20px 0 20px;
+    background-color: rgba(255,255,255, 0.3);
+    border-radius: 8px;
+}
+.adminAuthorization form h5{
+    width: 100%;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+}
+.adminAuthorization form div{
+    padding: 5px 0;
+    width: 100%;
+}
+.adminAuthorization form div label{
+    width: 100%;
+}
+.adminAuthorization form div input{
+    width: 100%;
+}
+.adminAuthorization form button{
+    width: 30%;
+    height: 35px;
+    margin: 25px 35px;
+    cursor: pointer;
+}

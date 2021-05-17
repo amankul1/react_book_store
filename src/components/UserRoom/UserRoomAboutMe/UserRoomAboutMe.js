@@ -8,6 +8,7 @@ import {Redirect} from "react-router-dom";
 import InputUI from "../UserRoomUI/InputUI/InputUI";
 import TextAreaUI from "../UserRoomUI/TextAreaUI/TextAreaUI";
 import {anotherAxios} from "../../withAxios/withAxios";
+import axios from "axios";
 
 
 const UserRoomAboutMe = () =>{
@@ -176,10 +177,16 @@ const UserRoomAboutMe = () =>{
         e.preventDefault();
         try{
             const userName = name + ' ' +surName;
-            const response = await newAxios.put(`/author/${myContext.store.userId}`, {
+            const response = await axios.put(`https://pj-bookstore.herokuapp.com/author/${myContext.store.userId}`, {
                     'name': userName,
                     'birthDate': birthDay,
                     'biography': biography
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${myContext.store.userToken}`,
+                        ContentType: 'application/json'
+                    }
                 })
             const [n, sn] = response.data.name.split(' ');
             setName(n);
@@ -214,55 +221,60 @@ const UserRoomAboutMe = () =>{
         }
     }
         if(myContext.store.isLogin){
-            return(
-                <div className={classes.UserRoom}>
-                    <div className={classes.header}>
-                        <HeaderComponent/>
-                    </div>
-                    <div className={classes.verticalMenu}>
-                        <VerticalMenu name={myContext.store.userEmail} role={myContext.store.role}/>
-                    </div>
-                    <div className={classes.content}>
+            if(myContext.store.role==='admin'){
+                return(
+                    <Redirect to='/admin' exact />
+                )
+            }else{
+                return(
+                    <div className={classes.UserRoom}>
+                        <div className={classes.header}>
+                            <HeaderComponent/>
+                        </div>
+                        <div className={classes.verticalMenu}>
+                            <VerticalMenu name={myContext.store.userEmail} role={myContext.store.role}/>
+                        </div>
+                        <div className={classes.content}>
 
-                        {myContext.store.role === 'writer'?
-                            <>
-                                <form className={classes.personalInfo}>
-                                    <div>
-                                        <h4> Personal info </h4>
-                                    </div>
-                                    <InputUI
-                                        type='text'
-                                        value={name}
-                                        label="Name"
-                                        isValid = {nameValid}
-                                        onChange={(e)=>{textInputHandler(e, 'name')}}
-                                    />
-                                    <InputUI
-                                        type='text'
-                                        value={surName}
-                                        label="Surname"
-                                        isValid = {surNameValid}
-                                        onChange={(e)=>{textInputHandler(e, 'surname')}}
-                                    />
-                                    <InputUI
-                                        type='Date'
-                                        value={birthDay}
-                                        label="Birth date"
-                                        isValid = {birthDateValid}
-                                        onChange={(e)=>{textInputHandler(e, 'birth-date')}}
-                                    />
+                            {myContext.store.role === 'writer'?
+                                <>
+                                    <form className={classes.personalInfo}>
+                                        <div>
+                                            <h4> Personal info </h4>
+                                        </div>
+                                        <InputUI
+                                            type='text'
+                                            value={name}
+                                            label="Name"
+                                            isValid = {nameValid}
+                                            onChange={(e)=>{textInputHandler(e, 'name')}}
+                                        />
+                                        <InputUI
+                                            type='text'
+                                            value={surName}
+                                            label="Surname"
+                                            isValid = {surNameValid}
+                                            onChange={(e)=>{textInputHandler(e, 'surname')}}
+                                        />
+                                        <InputUI
+                                            type='Date'
+                                            value={birthDay}
+                                            label="Birth date"
+                                            isValid = {birthDateValid}
+                                            onChange={(e)=>{textInputHandler(e, 'birth-date')}}
+                                        />
 
-                                    <TextAreaUI
-                                        label="Biography"
-                                        rows={10}
-                                        cols={50}
-                                        value={biography}
-                                        isValid={biographyValid}
-                                        onChange={(e)=>{textInputHandler(e, 'biography')}}
-                                    />
-                                    <button disabled={!(birthDateValid && biographyValid)} className="btn btn-success" onClick={authorProfileHandler}>Change</button>
-                                </form>
-                            </>:
+                                        <TextAreaUI
+                                            label="Biography"
+                                            rows={10}
+                                            cols={50}
+                                            value={biography}
+                                            isValid={biographyValid}
+                                            onChange={(e)=>{textInputHandler(e, 'biography')}}
+                                        />
+                                        <button disabled={!(birthDateValid && biographyValid)} className="btn btn-success" onClick={authorProfileHandler}>Change</button>
+                                    </form>
+                                </>:
 
                                 myContext.store.role==='reader' || myContext.store.role=== "moderator"?
                                     <>
@@ -288,41 +300,42 @@ const UserRoomAboutMe = () =>{
                                         </form>
                                     </> : null
 
-                        }
+                            }
 
-                        <form className={classes.personalInfo}>
-                            <div>
-                                <h4> Change password </h4>
-                            </div>
-                            <InputUI
-                                type='password'
-                                value={oldPassword}
-                                label="Old password"
-                                isValid = {oldPasswordValid}
-                                onChange={(e)=>{passwordInputHandler(e, 'old')}}
-                            />
-                            <InputUI
-                                type='password'
-                                value={newPassword}
-                                label="New password"
-                                isValid = {newPasswordValid}
-                                onChange={(e)=>{passwordInputHandler(e, 'new')}}
-                            />
-                            <InputUI
-                                type='password'
-                                value={confirmPassword}
-                                label="Confirm"
-                                isValid = {confirmPasswordValid}
-                                onChange={(e)=>{passwordInputHandler(e, 'confirm')}}
-                            />
-                            <button disabled={!(oldPasswordValid && newPasswordValid && confirmPasswordValid)} className="btn btn-success" onClick={passwordChangeHandler}>Change</button>
-                        </form>
+                            <form className={classes.personalInfo}>
+                                <div>
+                                    <h4> Change password </h4>
+                                </div>
+                                <InputUI
+                                    type='password'
+                                    value={oldPassword}
+                                    label="Old password"
+                                    isValid = {oldPasswordValid}
+                                    onChange={(e)=>{passwordInputHandler(e, 'old')}}
+                                />
+                                <InputUI
+                                    type='password'
+                                    value={newPassword}
+                                    label="New password"
+                                    isValid = {newPasswordValid}
+                                    onChange={(e)=>{passwordInputHandler(e, 'new')}}
+                                />
+                                <InputUI
+                                    type='password'
+                                    value={confirmPassword}
+                                    label="Confirm"
+                                    isValid = {confirmPasswordValid}
+                                    onChange={(e)=>{passwordInputHandler(e, 'confirm')}}
+                                />
+                                <button disabled={!(oldPasswordValid && newPasswordValid && confirmPasswordValid)} className="btn btn-success" onClick={passwordChangeHandler}>Change</button>
+                            </form>
+                        </div>
+                        <div className={classes.footer}>
+                            <FooterComponent/>
+                        </div>
                     </div>
-                    <div className={classes.footer}>
-                        <FooterComponent/>
-                    </div>
-                </div>
-            )
+                )
+            }
         }else{
             return(
                 <Redirect to='/' exact />

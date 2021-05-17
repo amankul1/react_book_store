@@ -3,7 +3,8 @@ import classes from "./AboutWriter.module.css";
 import HeaderComponent from "../general/header/HeaderComponent";
 import FooterComponent from "../general/footer/FooterComponent";
 import {getAxios} from "../withAxios/withAxios";
-import {Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
+import author_image from "../UserRoom/UserRoomIcons/author_image.png"
 
 const AboutWriter = ({match, location})=>{
 
@@ -23,7 +24,7 @@ const AboutWriter = ({match, location})=>{
             setBirthDate(response.data.birthDate);
             setBiography(response.data.biography);
             setRating(response.data.averageRating);
-            setImage(response.data.image ? response.data.image.url : null);
+            setImage(response.data.image ? response.data.image.url : author_image);
         }catch (e){
             alert(e.message);
             setIsAuthor(false);
@@ -42,7 +43,7 @@ const AboutWriter = ({match, location})=>{
                 </div>
                 <div className={classes.contentWrapper}>
                     <div className={classes.contentLeft}>
-                        <img src={image ? image: "https://lh3.googleusercontent.com/proxy/TicLZ-TUZ7THhwdGjb0gAXcTbZJhlNRE0_nzpoIEOcSS0avr0gskvnD9EUv9-P9cR8lIfiGCsrR3mtFSQBR50Ycin6lp_sdmXZr9Jho"} alt=""/>
+                        <img src={image} alt=""/>
                     </div>
                     <div className={classes.contentRight}>
                         <div>
@@ -55,7 +56,9 @@ const AboutWriter = ({match, location})=>{
                                 <div className={classes.contentItem}>
                                     <h5>Books:</h5>
                                     <p>
-                                        <button className="btn btn-light"> My books </button>
+                                        <NavLink to={`/author/books/${id}`}>
+                                            <button className="btn btn-light"> My books </button>
+                                        </NavLink>
                                     </p>
                                 </div>
                                 <div className={classes.contentItem}>

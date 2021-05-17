@@ -51,3 +51,28 @@
 .commentForm button{
     margin-left: 15px;
 }
+.contentCommentsItem{
+    display: flex;
+    width: 95%;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+.contentCommentsItem .userName{
+    width: 15%;
+}
+.contentCommentsItem .commentMessage{
+    width: 65%;
+}
+.contentCommentsItem .commentRating{
+    width: 10%;
+}
+.delUpdButtons{
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
+    padding-right: 10px;
+}
+.delUpdButtons img{
+    height: 20px;
+    cursor: pointer;
+}

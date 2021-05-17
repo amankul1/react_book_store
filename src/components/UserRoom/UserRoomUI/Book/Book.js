@@ -20,19 +20,30 @@ const Book = (props)=>{
             </div>
             <div className={classes.bookRight} onClick={expendedHandler}>
                 <div className={classes.bookTitles}>
-                    <div className={classes.name}> Name </div>
-                    <div className={classes.rating}> Rating </div>
+                    <div className={classes.name}> {props.name} </div>
+                    <div className={classes.rating}> {props.rating} </div>
                     <div className={classes.comments}> Comments </div>
                 </div>
                 {isExpended?
                     <div className={classes.bookDown}>
-                        <div className={classes.bookImage}>
-                            <div> image </div>
-                        </div>
                         <div className={classes.bookComments}>
-                            <div>Comments</div>
-                            <div>Comments</div>
-                            <div>Comments</div>
+                            {props.comments.length > 0 ?
+                                <>
+                                    {
+                                        props.comments.map((item, index)=>{
+                                            return(
+                                                <div className={classes.bookComments}>
+                                                    <div className={classes.commentUserName}>{item.user.name}</div>
+                                                    <div><p>{item.description}</p></div>
+                                                    <span>Rating: {item.rating}</span>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </>
+                                :
+                                "No comments !"
+                            }
                         </div>
                     </div>: null}
             </div>

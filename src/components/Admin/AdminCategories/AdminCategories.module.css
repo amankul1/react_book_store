@@ -1,0 +1,28 @@
+.pageWrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+.AdminInfoContent{
+    width: 80%;
+    padding: 50px 5%;
+    background-color: #EBEFF2;
+}
+.addCategoryWrapper{
+    margin: 30px 0 0 0;
+}
+
+.addCategoryWrapper form{
+    width: 100%;
+}
+.addCategoryWrapper form label{
+    width: 12%;
+}
+.addCategoryWrapper form input{
+    width: 50%;
+    height: 35px;
+}
+.addCategoryWrapper form button{
+    width: 15%;
+    height: 35px;
+    margin-left: 2%;
+}

@@ -1,7 +1,7 @@
 import './App.css';
 import "fontsource-roboto";
 import React from "react";
-import {Switch, Route, Redirect} from "react-router-dom";
+import {Switch, Route, Redirect, NavLink} from "react-router-dom";
 import Registration from "./components/userAuthorization/registration/Registration";
 import Authentication from "./components/userAuthorization/authentication/Authentication";
 import Books from "./components/books/Books";
@@ -20,6 +20,12 @@ import ActivateInfo from "./components/userAuthorization/ActivateAccount /Activa
 import ModeratorRegister from "./components/userAuthorization/ModeratorRegister/ModeratorRegister";
 import {withStore} from "./hoc/Store/Store";
 import AuthorBooks from "./components/AuthorBooks/AuthorBooks";
+import AdminPersonalInfo from "./components/Admin/AdminPersonalInfo/AdminPersonalInfo";
+import AdminAuthors from "./components/Admin/AdminAuthors/AdminAuthors";
+import AdminBooks from "./components/Admin/AdminBooks/AdminBooks";
+import AdminCategories from "./components/Admin/AdminCategories/AdminCategories";
+import AdminUsers  from "./components/Admin/AdminUsers/AdminUsers";
+import AdminRegister from "./components/userAuthorization/AdminRegister/AdminRegister";
 
 export const userContext = React.createContext({});
 
@@ -36,28 +42,39 @@ function App(props) {
                 setImage: props.setImage
             }}>
                 <Switch>
-                    <Route path='/registration' component={Registration}/>
-                    <Route path='/authentication' component={Authentication}/>
+                    <Route path='/registration' exact component={Registration}/>
+                    <Route path='/authentication' exact component={Authentication}/>
                     <Route path="/home" component={HomePage}/>
                     <Route path="/" exact component={HomePage}/>
-                    <Route path="/books" component={Books}/>
-                    <Route path="/category" component={Category}/>
-                    <Route path="/authors" component={Authors}/>
-                    <Route path="/book/info/:id" component={BookInfo}/>
-                    <Route path="/forget-password" component={ForgotPassword}/>
-                    <Route path="/change-password" component={ChangePassword}/>
-                    <Route path="/book/author/:id"  component={AboutWriter}/>
-                    <Route path="/user/room/about/me"  component={UserRoomAboutMe} />
-                    <Route path="/author/books/:id" component={AuthorBooks} />
-                    <Route path="/change/user/image" component={ChangeUserImage}/>
+                    <Route path="/books" exact component={Books}/>
+                    <Route path="/category" exact component={Category}/>
+                    <Route path="/authors" exact component={Authors}/>
+                    <Route path="/book/info/:id" exact component={BookInfo}/>
+                    <Route path="/forget-password" exact component={ForgotPassword}/>
+                    <Route path="/change-password" exact component={ChangePassword}/>
+                    <Route path="/book/author/:id" exact component={AboutWriter}/>
+                    <Route path="/user/room/about/me" exact component={UserRoomAboutMe} />
+                    <Route path="/author/books/:id" exact component={AuthorBooks} />
+                    <Route path="/change/user/image" exact component={ChangeUserImage}/>
+                    <Route path="/moderator/registration" exact component={ModeratorRegister} />
+                    <Route path="/user/account/activate/info" exact component={ActivateInfo}/>
+                    <Route path="/user/account/activate/:code" exact component={ActivateAccount}/>
+
                     {props.store.role==='writer' || props.store.role==='moderator'?
                         <>
                             <Route path="/user/room/my/books"  component={UserRoomMyBooks} />
                         </> : null
                     }
-                    <Route path="/user/account/activate/info" component={ActivateInfo}/>
-                    <Route path="/user/account/activate/:code" component={ActivateAccount}/>
-                    <Route path="/moderator/registration" component={ModeratorRegister} />
+                    {
+                        (props.store.role==='admin')? <>
+                            <Route path="/admin/" exact component={AdminPersonalInfo} />
+                            <Route path="/admin/books" exact component={AdminBooks} />
+                            <Route path="/admin/categories" exact component={AdminCategories} />
+                            <Route path="/admin/authors" exact component={AdminAuthors} />
+                            <Route path="/admin/users" exact component={AdminUsers}/>
+                            <Route path='/admin/register' exact  component={AdminRegister} />
+                        </>: <Redirect to='/'/>
+                    }
                     <Redirect to='/'/>
 
                 </Switch>

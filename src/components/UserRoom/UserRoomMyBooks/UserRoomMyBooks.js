@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useLayoutEffect, useState} from "react";
 import classes from "./UserRoomMyBooks.module.css"
 import HeaderComponent from "../../general/header/HeaderComponent";
 import FooterComponent from "../../general/footer/FooterComponent";
@@ -14,49 +14,58 @@ import axios from "axios";
 
 const UserRoomMyBooks = () =>{
     const myContext = useContext(userContext);
+    const myAxios = getAxios();
 
     //--------------------------------------writer-------------------------------------------
-        const [bookList, setBookList] = useState(
-            {
-                books : [
-                    {
-                        id: 1,
-                        name: 'Gogogogo',
-                        rating: 15.5,
-                        comments: [],
-                        pdfUrl: '',
-                        imageUrl: '',
-                        isExpanded: false
-                    },
-                    {
-                        id: 2,
-                        name: 'Gogogogo',
-                        rating: 15.5,
-                        comments: [],
-                        pdfUrl: '',
-                        imageUrl: '',
-                        isExpanded: false
-                    },
-                    {
-                        id: 3,
-                        name: 'Gogogogo',
-                        rating: 15.5,
-                        comments: [],
-                        pdfUrl: '',
-                        imageUrl: ''
-                    }
-                ]
-            }
-        )
+        const [bookList, setBookList] = useState([])
         const [isAddBook, setIsAddBook] = useState(false);
         const [categories, setCategories] = useState([]);
+        const [moderatorBooks, setModeratorBooks] = useState([]);
 
-        function getBooksHandler(){
+        useLayoutEffect( ()=>{
+            if(myContext.store.role==='writer'){
+                myAxios.get('/category').then(response=>{
+                    setCategories(response.data);
+                }).catch(e=>{
+                    console.log(e.message);
+                })
+                myAxios.get(`/book/author/${myContext.store.userId}`).then(
+                    response=>{
+                        setBookList(response.data);
+                    }
+                ).catch(e=>{
+                    alert(e.message);
+                })
+            }else if(myContext.store.role==='moderator'){
+                myAxios.get(`/book/confirm`).then(
+                    response=>{
+                        setModeratorBooks(response.data);
+                        console.log(response.data);
+                    }
+                ).catch(e=>{
+                    alert(e.message);
+                })
+            }
 
-        }
+        }, [])
 
-        const bookDeleteHandler = (id)=>{
-            console.log(id);
+
+
+        async function bookDeleteHandler(id){
+            const authorAxios = anotherAxios(myContext.store.userToken);
+            try{
+                const response = await authorAxios.delete(`https://pj-bookstore.herokuapp.com/book/${id}`);
+                alert(response.data.message);
+                myAxios.get(`/book/author/${myContext.store.userId}`).then(
+                    response=>{
+                        setBookList(response.data);
+                    }
+                ).catch(e=>{
+                    alert(e.message);
+                })
+            }catch (e){
+                alert(e.message);
+            }
         }
 
         const bookChangeHandler = (id) =>{
@@ -109,10 +118,18 @@ const UserRoomMyBooks = () =>{
                     }
                 });
                 alert("Book was added!");
+                myAxios.get(`/book/author/${myContext.store.userId}`).then(
+                    response=>{
+                        setBookList(response.data);
+                    }
+                ).catch(e=>{
+                    alert(e.message);
+                })
                 setBookName('');
                 setCategoryId(1);
+                setIsAddBook(false);
             }catch (e){
-                console.log(e.message, 2)
+                console.log(e.message)
             }
 
         }catch(e){
@@ -122,30 +139,6 @@ const UserRoomMyBooks = () =>{
 
     }
 //----------------------------------Moderator----------------------------------------------
-        const [books, setBooks] = useState(
-            {
-                bookList : [
-                    {
-                        id: 1,
-                        name: 'Gogogogo',
-                        pdfUrl: '',
-                        author: 'Fofofofo'
-                    },
-                    {
-                        id: 2,
-                        name: 'Gogogogo',
-                        pdfUrl: '',
-                        author: 'Fofofofo'
-                    },
-                    {
-                        id: 3,
-                        name: 'Gogogogo',
-                        pdfUrl: '',
-                        author: 'Fofofofo'
-                    },
-                ]
-            }
-        )
 
         const refuseBook = (id) =>{
             alert(id);
@@ -154,16 +147,6 @@ const UserRoomMyBooks = () =>{
         const approveBook = (id) =>{
             alert(id);
         }
-
-    useEffect( ()=>{
-        const myAxios = getAxios();
-        myAxios('/category').then(response=>{
-            setCategories(response.data);
-        }).catch(e=>{
-            console.log(e.message);
-        })
-
-    }, [])
 
     if(myContext.store.isLogin){
         return(
@@ -221,32 +204,37 @@ const UserRoomMyBooks = () =>{
                                     </div>
                                     :
                                     <div className={classes.bookListWrapper}>
-                                        <div><h5 className={classes.bookListTitle}>My books</h5></div>
-                                        <ul>
-                                            {bookList.books.map((book, index)=>{
-                                                return(
-                                                    <Book
-                                                        id={book.id}
-                                                        index={index}
-                                                        name={book.name}
-                                                        rating={book.rating}
-                                                        comments={book.comments}
-                                                        pdfUrl={book.pdfUrl}
-                                                        imageUrl={book.imageUrl}
-                                                        bookDelete = {bookDeleteHandler}
-                                                        bookChange = {bookChangeHandler}
-                                                        key={index}
-                                                    />
-                                                )
-                                            })}
-                                        </ul>
+                                        {
+                                            (bookList.length > 0)?
+                                                <>
+                                                    <div><h5 className={classes.bookListTitle}>My books</h5></div>
+                                                    <ul>
+                                                        {bookList.map((book, index)=>{
+                                                            return(
+                                                                <Book
+                                                                    id={book.id}
+                                                                    index={index}
+                                                                    name={book.name}
+                                                                    rating={book.averageRating}
+                                                                    comments={book.comments}
+                                                                    imageUrl={book.image?book.image:null}
+                                                                    bookDelete = {bookDeleteHandler}
+                                                                    bookChange = {bookChangeHandler}
+                                                                    key={index}
+                                                                />
+                                                            )
+                                                        })}
+                                                    </ul>
+                                                </>:
+                                                "No books"
+                                        }
                                     </div>
 
                                 }
                             </>:
                             <div>
                                 <ModeratorBooksContent
-                                    bookList={books.bookList}
+                                    bookList={moderatorBooks}
                                     refuseBook={refuseBook}
                                     approveBook={refuseBook}
                                 />

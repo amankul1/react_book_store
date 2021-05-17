@@ -64,15 +64,31 @@ function Authentication(){
                     try{
                         let url = 'http://pj-bookstore.herokuapp.com/user/email/'+email;
                         const res = await axios.get(url);
-                        setIsLogin(true);
                         myContext.setUserToken(response.data.token);
-                        myContext.setUserId(res.data.id);
                         myContext.setUserEmail(res.data.email);
-                        myContext.setUserRole(res.data.occupation.toLowerCase());
+                        myContext.setUserRole(res.data.occupation?res.data.occupation.toLowerCase():'admin');
                         myContext.setIsLogin(true);
+                        myContext.setUserId(res.data.id);
                         myContext.setImage(res.data.image?res.data.image.url:author_image);
+                        if(!!res.data.occupation){
+                            if(res.data.occupation.toLowerCase()==='writer'){
+                                axios.get(`http://pj-bookstore.herokuapp.com/user/author/${res.data.id}`).then(
+                                    r=>{
+                                        myContext.setUserId(r.data.id);
+                                        myContext.setImage(r.data.image?r.data.image.url:author_image);
+                                    }
+                                ).catch(e=>{
+                                    alert('Error by get author id');
+                                })
+                            }else{
+                                myContext.setUserId(res.data.id);
+                                myContext.setImage(res.data.image?res.data.image.url:author_image);
+                            }
+                        }
+
+                        setIsLogin(true);
                     }catch (e) {
-                        alert("Error, try again !");
+                        alert("Error, try again !!!!");
                     }
                 }
             } catch (e) {

@@ -30,9 +30,11 @@ const ChangeUserImage = ()=>{
 
             if(myContext.store.role === 'writer'){
                 const response = await myAxios.put(`author/${myContext.store.userId}/image`, data);
+                myContext.setImage(response.data.image?response.data.image.url:myContext.store.image);
                 alert('Success');
             }else{
                 const response = await myAxios.put('user/image', data);
+                myContext.setImage(response.data.image?response.data.image.url:myContext.store.image);
                 alert('Success');
             }
             setSuccess(true);

@@ -12,7 +12,9 @@ function ActivateAccount({match, location}){
         if(match.params.code.length > 0){
             try{
                 const response = await myAxios.get(`http://pj-bookstore.herokuapp.com/register/activate/${match.params.code}`);
+                alert(response.data.message);
                 setUserRole(response.data.role);
+                console.log(response.data);
             }catch (e){
                 alert("Something went wrong repeat the process !")
             }

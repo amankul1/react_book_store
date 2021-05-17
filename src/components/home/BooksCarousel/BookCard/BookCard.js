@@ -11,7 +11,7 @@ const BookCard = (props)=>{
                 </NavLink>
                 </div>
             <div className={classes.cardRight}>
-                <div className={classes.bookInfo} >Name: {props.book.author}</div>
+                <div className={classes.bookInfo} >Name: {props.book.name}</div>
                 <div className={classes.bookInfo}  >Author: {props.book.author}</div>
                 <div className={classes.bookInfo}  >Rating: {props.book.rating}</div>
                 <div className={classes.bookInfo}  >Date: {props.book.date}</div>

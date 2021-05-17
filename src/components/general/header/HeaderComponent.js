@@ -59,9 +59,13 @@ const HeaderComponent = (props)=>{
                                     {
                                         isDrop ? <> <div className={classes.dropDownItem} onClick={clickLogOutHandler}>Log out</div>
                                             <div className={classes.dropDownItem} onClick={()=>{setIsDrop(!isDrop);}}>
-                                                <NavLink to='/user/room/about/me' exact>
-                                                    Go room
-                                                </NavLink>
+                                                {(myContext.store.role==='admin')?
+                                                    <NavLink to='/admin' exact>
+                                                        Go room
+                                                    </NavLink>:
+                                                    <NavLink to='/user/room/about/me' exact>
+                                                        Go room
+                                                    </NavLink>}
                                             </div>
                                         </> : null
                                     }
