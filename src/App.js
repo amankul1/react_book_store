@@ -26,6 +26,7 @@ import AdminBooks from "./components/Admin/AdminBooks/AdminBooks";
 import AdminCategories from "./components/Admin/AdminCategories/AdminCategories";
 import AdminUsers  from "./components/Admin/AdminUsers/AdminUsers";
 import AdminRegister from "./components/userAuthorization/AdminRegister/AdminRegister";
+import Search from "./components/Search/Search";
 
 export const userContext = React.createContext({});
 
@@ -59,7 +60,7 @@ function App(props) {
                     <Route path="/moderator/registration" exact component={ModeratorRegister} />
                     <Route path="/user/account/activate/info" exact component={ActivateInfo}/>
                     <Route path="/user/account/activate/:code" exact component={ActivateAccount}/>
-
+                    <Route path="/search" exact component={Search}/>
                     {props.store.role==='writer' || props.store.role==='moderator'?
                         <>
                             <Route path="/user/room/my/books"  component={UserRoomMyBooks} />

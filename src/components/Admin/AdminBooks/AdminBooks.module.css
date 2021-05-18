@@ -7,3 +7,25 @@
     padding: 50px 5%;
     background-color: #EBEFF2;
 }
+.AdminInfoContent form{
+    width: 60%;
+    background: white;
+    padding: 30px 50px;
+    border-radius: 5px;
+}
+.AdminInfoContent form div{
+    width: 100%;
+    padding: 10px 0;
+}
+.AdminInfoContent form div label{
+    width: 40%;
+}
+.AdminInfoContent form div input{
+    width: 60%;
+}
+.AdminInfoContent form div select{
+    width: 60%;
+}
+.AdminInfoContent form button{
+    margin: 20px 30px;
+}

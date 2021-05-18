@@ -10,7 +10,6 @@ import {userContext} from "../../../App";
 const HeaderComponent = (props)=>{
     const myContext = useContext(userContext);
     const [isDrop, setIsDrop] = useState(false);
-    const [searchText, setSearchText] = useState('');
 
     const dropHandler = ()=>{
         setIsDrop(!isDrop);
@@ -23,30 +22,17 @@ const HeaderComponent = (props)=>{
         myContext.setUserToken('');
     }
 
-    const searchChangeHandler = (e)=>{
-        setSearchText(e.target.value);
-    }
 
     return (
         <div className={classes.mainWrapper}>
             <Grid container spacing={0}>
                 <Grid className={classes.headerItemsWrapper} item xs={4}>
                     <img className={classes.logoImage} src={logo} alt=""/>
-                    <h3 style={{width:"100%", textAlign: "center"}}><NavLink to="/" exact>LIBOOKS </NavLink></h3>
+
                 </Grid>
                 <Grid className={classes.headerItemsWrapper} item xs={5}>
                     <Box component="div" className={classes.searchWrapper}>
-                        <TextField
-                            style={{width:"90%"}}
-                            id="outlined-textarea"
-                            label="Search"
-                            rowsMax={1}
-                            placeholder="Enter book name"
-                            multiline
-                            value={searchText}
-                            onChange={searchChangeHandler}
-                        />
-                        <button className='btn btn-primary'>Search</button>
+                        <h3 style={{width:"100%", textAlign: "center"}}><NavLink to="/" exact>LIBOOKS </NavLink></h3>
                     </Box>
                 </Grid>
                 <Grid className={classes.headerItemsWrapper} item xs={3}>

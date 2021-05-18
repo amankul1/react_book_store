@@ -22,7 +22,7 @@ const ModeratorBooksContent = (props) =>{
                                         <div className={classes.bookName}>{item.name}</div>
                                         <div className={classes.authorName}>{item.author.name}  </div>
                                         <div className={classes.controlIcons}>
-                                            <img src={bookDownloadIcon} alt=""/>
+                                            <a href={item.data?item.data.url:''} download><img src={bookDownloadIcon} alt=""/></a>
                                             <img src={okIcon} onClick={()=>{props.approveBook(item.id)}} alt=""/>
                                             <img src={refuseIcon} onClick={()=>{props.refuseBook(item.id)}} alt=""/>
                                         </div>

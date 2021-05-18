@@ -88,7 +88,7 @@ const BookInfo = ({match, location})=> {
             setRatingNumber(2);
             setIsCommentAdding(false);
         }catch (e){
-            setModalMessage(e.message);
+            setModalMessage(e.message+ ' '+ match.params.id);
             modalWindowHandler(true);
             setText('');
             setRatingNumber(2);
@@ -228,7 +228,7 @@ const BookInfo = ({match, location})=> {
                                     <div className={classes.contentItem}>
                                         <form className={classes.commentForm}>
                                             <InputUI
-                                                label="Rate this book "
+                                                label="Rating (0-5)"
                                                 type='Number'
                                                 isValid={true}
                                                 onChange={(e)=>{

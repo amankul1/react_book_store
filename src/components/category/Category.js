@@ -4,7 +4,7 @@ import MenuComponent from "../general/menu/MenuComponent";
 import FooterComponent from "../general/footer/FooterComponent";
 import CategoryContent from "../category/CategoryContent/CategoryContent";
 import {getAxios} from "../withAxios/withAxios";
-import axios from "axios";
+import defImageBook from "../UserRoom/UserRoomIcons/default_book_image.png"
 
 class  Category extends React.Component{
     myAxios;
@@ -13,20 +13,7 @@ class  Category extends React.Component{
         super(props);
         this.state = {
             activeGender: '',
-                books:[
-                    {
-                        id:1,
-                        name: "Karl Mark dfsvsd asdfvsd",
-                        author: "KAZUO ISHIGUROs sdfsdf sdfv",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    },
-                    {
-                        id:2,
-                        name: "Karl Mark",
-                        author: "KAZUO ISHIGURO",
-                        image: "https://media.glamour.com/photos/5e28a12e3fd2250008501147/master/w_400%2Cc_limit/Screen%2520Shot%25202020-01-22%2520at%25202.22.58%2520PM.png"
-                    }
-                ],
+            books:[],
             genders:[]
 
         }
@@ -45,11 +32,25 @@ class  Category extends React.Component{
                 tempState.genders = arr;
                 tempState.activeGender = arr[0].name;
                 this.setState(tempState);
-                try{
-                    const res = await axios()
-                }catch (err){
-
-                }
+            }
+        }catch (e){
+            alert("What went wrong !")
+        }
+        try{
+            const response =  await this.myAxios.get('/book');
+            let array = [];
+            if(response.data.length > 0){
+                response.data.forEach((item)=>{
+                    array.push({
+                        id: item.id,
+                        name: item.name,
+                        author: item.author.name,
+                        image: item.image?item.image.url:defImageBook
+                    });
+                })
+                const tempState = {...this.state}
+                tempState.books = array;
+                this.setState(tempState);
             }
         }catch (e){
             alert("What went wrong !")

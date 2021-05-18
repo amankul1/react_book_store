@@ -7,7 +7,7 @@ const InputUI = (props)=>{
         <div className={classes.inputWrapper}>
             <label htmlFor={htmlFor}>{props.label}:</label>
             <input type={props.type} id={htmlFor}  onChange={props.onChange} value={props.value} />
-            {props.isValid ? null : <span>Don't valid</span>}
+            {props.isValid ? null : <span></span>}
         </div>
     )
 }

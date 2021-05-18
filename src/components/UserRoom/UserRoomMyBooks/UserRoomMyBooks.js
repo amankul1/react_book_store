@@ -37,10 +37,10 @@ const UserRoomMyBooks = () =>{
                     alert(e.message);
                 })
             }else if(myContext.store.role==='moderator'){
+                const myAxios = anotherAxios(myContext.store.userToken);
                 myAxios.get(`/book/confirm`).then(
                     response=>{
                         setModeratorBooks(response.data);
-                        console.log(response.data);
                     }
                 ).catch(e=>{
                     alert(e.message);
@@ -141,11 +141,43 @@ const UserRoomMyBooks = () =>{
 //----------------------------------Moderator----------------------------------------------
 
         const refuseBook = (id) =>{
-            alert(id);
+            const myAxios = anotherAxios(myContext.store.userToken);
+            myAxios.delete(`/book/confirm/${id}`).then(
+                response=>{
+                    myAxios.get(`/book/confirm`).then(
+                        response=>{
+                            setModeratorBooks(response.data);
+                        }
+                    ).catch(e=>{
+                        alert(e.message);
+                    })
+                    alert(response.data.message);
+                }
+            ).catch(
+                e=>{
+                    alert(e.message);
+                }
+            )
         }
 
         const approveBook = (id) =>{
-            alert(id);
+            const myAxios = anotherAxios(myContext.store.userToken);
+            myAxios.put(`/book/confirm/${id}`).then(
+                response=>{
+                    myAxios.get(`/book/confirm`).then(
+                        response=>{
+                            setModeratorBooks(response.data);
+                        }
+                    ).catch(e=>{
+                        alert(e.message);
+                    })
+                    alert(response.data.message);
+                }
+            ).catch(
+                e=>{
+                    alert(e.message);
+                }
+            )
         }
 
     if(myContext.store.isLogin){

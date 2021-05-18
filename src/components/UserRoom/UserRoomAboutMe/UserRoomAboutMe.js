@@ -83,7 +83,21 @@ const UserRoomAboutMe = () =>{
                 console.log(e);
             })
         }else if(myContext.store.role === 'moderator'){
-
+            let url = '/user/email/'+myContext.store.userEmail;
+            newAxios.get(url).
+            then(response=>{
+                const [n, sn] = response.data.name.split(' ');
+                setName(n);
+                setSurName(sn);
+                if(n.length > 0){
+                    setNameValid(true);
+                }
+                if(sn.length > 0){
+                    setSurNameValid(true);
+                }
+            }).catch(e=>{
+                console.log(e);
+            })
         }
     }, [])
 

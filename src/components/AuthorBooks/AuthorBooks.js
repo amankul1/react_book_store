@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./AuthorBooks.module.css"
 import HeaderComponent from "../general/header/HeaderComponent";
+import MenuComponent from "../general/menu/MenuComponent";
 import FooterComponent from "../general/footer/FooterComponent";
 import BookCard from "../general/BookCard/BookCard";
 import {NavLink} from "react-router-dom";
@@ -44,6 +45,7 @@ class AuthorBooks extends React.Component{
         return(
             <div>
                 <HeaderComponent/>
+                <MenuComponent/>
                 <div className={classes.content}>
                     <div className={classes.contentTitle}>
                         <h4> {this.state.authorName?this.state.authorName:null} </h4>

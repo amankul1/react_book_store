@@ -66,7 +66,12 @@ function Authentication(){
                         const res = await axios.get(url);
                         myContext.setUserToken(response.data.token);
                         myContext.setUserEmail(res.data.email);
-                        myContext.setUserRole(res.data.occupation?res.data.occupation.toLowerCase():'admin');
+                        myContext.setUserRole(res.data.occupation?
+                            res.data.occupation.toLowerCase():
+                            res.data.role.name==='ROLE_MODERATOR'?
+                            'moderator':
+                            'admin'
+                        );
                         myContext.setIsLogin(true);
                         myContext.setUserId(res.data.id);
                         myContext.setImage(res.data.image?res.data.image.url:author_image);

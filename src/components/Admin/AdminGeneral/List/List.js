@@ -106,7 +106,7 @@ const List = (props)=>{
                                                     </h6>
                                                     <span>{item.name}</span>
                                                     <span>{item.author.name}</span>
-                                                    <span>{item.averageRating}</span>
+                                                    <span>{item.averageRating.toFixed(2)}</span>
                                                     <img src={delBut} onClick={()=>{props.delete(item.id)}} alt=""/>
                                                 </li>
                                             )

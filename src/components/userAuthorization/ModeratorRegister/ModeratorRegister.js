@@ -45,7 +45,7 @@ const ModeratorRegister = ()=>{
                 "name": name,
                 "surname": surName
             });
-
+            alert(response.data.name + ' was success changed!');
             setToHome(true);
 
         }catch (e){

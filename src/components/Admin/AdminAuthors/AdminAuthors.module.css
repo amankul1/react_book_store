@@ -7,3 +7,34 @@
     padding: 50px 5%;
     background-color: #EBEFF2;
 }
+.AdminInfoContent form{
+    width: 100%;
+    padding: 20px 20px;
+    background: white;
+    border-radius: 5px;
+}
+.AdminInfoContent form div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.AdminInfoContent form div input{
+    width: 25%;
+}
+.AdminInfoContent form div span{
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+}
+.AdminInfoContent form div span input{
+    width: 60%;
+}
+
+.AdminInfoContent form div textarea{
+    width: 100%;
+}
+.AdminInfoContent form button{
+    margin-left: 20px;
+}
