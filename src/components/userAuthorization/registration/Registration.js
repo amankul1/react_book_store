@@ -131,7 +131,7 @@ function Registration() {
                         <div className="form-control">
                             <label className={css.formLabel} htmlFor="password">Password</label><br/>
                             <input style={(passDirty && passwordValid) ? {borderColor: "#732C9F"} : {borderColor: "red"}}
-                                   className={css.formInput} type="text" id="password" onBlur={() => setPassDirty(true)}
+                                   className={css.formInput} type="password" id="password" onBlur={() => setPassDirty(true)}
                                    onChange={passwordHandler} value={password}/>
                         </div>
                         <br/>

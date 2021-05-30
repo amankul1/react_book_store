@@ -126,7 +126,7 @@ function Authentication(){
                         </div><br/>
                         <div className="form-control">
                             <label className={css.formLabel} htmlFor="password">Password</label><br/>
-                            <input className={css.formInput} style = {(passwordValid && passDirty)?{borderColor:"#732C9F"}:{borderColor:"red"}} type="text" id="password" onChange={passwordHandler} onBlur={passDirtyHandler} value={password}/>
+                            <input className={css.formInput} style = {(passwordValid && passDirty)?{borderColor:"#732C9F"}:{borderColor:"red"}} type="password" id="password" onChange={passwordHandler} onBlur={passDirtyHandler} value={password}/>
                         </div><br/>
 
                         <div className={css.formButton}>

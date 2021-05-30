@@ -44,7 +44,7 @@ class  Category extends React.Component{
                     array.push({
                         id: item.id,
                         name: item.name,
-                        author: item.author.name,
+                        author: item.author? item.author.name: 'No name',
                         image: item.image?item.image.url:defImageBook
                     });
                 })
@@ -53,7 +53,7 @@ class  Category extends React.Component{
                 this.setState(tempState);
             }
         }catch (e){
-            alert("What went wrong !")
+            alert("What went wrong 1 !")
         }
     }
 

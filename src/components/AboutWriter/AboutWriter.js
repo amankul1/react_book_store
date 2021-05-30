@@ -51,7 +51,7 @@ const AboutWriter = ({match, location})=>{
                             <div className={classes.content}>
                                 <div className={classes.contentItem}>
                                     <h5>Rating:</h5>
-                                    <p>{rating? rating : 'undefined'}</p>
+                                    <p>{rating? rating.toFixed(2) : 'undefined'}</p>
                                 </div>
                                 <div className={classes.contentItem}>
                                     <h5>Books:</h5>

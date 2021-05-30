@@ -59,7 +59,7 @@ function App(props) {
                     <Route path="/change/user/image" exact component={ChangeUserImage}/>
                     <Route path="/moderator/registration" exact component={ModeratorRegister} />
                     <Route path="/user/account/activate/info" exact component={ActivateInfo}/>
-                    <Route path="/user/account/activate/:code" exact component={ActivateAccount}/>
+                    <Route path="/user/account/activate/:code" component={ActivateAccount}/>
                     <Route path="/search" exact component={Search}/>
                     {props.store.role==='writer' || props.store.role==='moderator'?
                         <>

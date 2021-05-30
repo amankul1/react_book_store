@@ -30,12 +30,12 @@ const HeaderComponent = (props)=>{
                     <img className={classes.logoImage} src={logo} alt=""/>
 
                 </Grid>
-                <Grid className={classes.headerItemsWrapper} item xs={5}>
+                <Grid className={classes.headerItemsWrapper} item xs={4}>
                     <Box component="div" className={classes.searchWrapper}>
                         <h3 style={{width:"100%", textAlign: "center"}}><NavLink to="/" exact>LIBOOKS </NavLink></h3>
                     </Box>
                 </Grid>
-                <Grid className={classes.headerItemsWrapper} item xs={3}>
+                <Grid className={classes.headerItemsWrapper} item xs={4}>
                     {
                         myContext.store.isLogin?
                             <Box component="div" className={classes.authorizationLinksWrapper}>

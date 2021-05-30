@@ -19,7 +19,7 @@
     background: skyblue;
 }
 .cardLeft img{
-    height: 80%;
+    height: 180px;
     transform: scale(1.2);
     transition: 300ms ease-in-out;
 }

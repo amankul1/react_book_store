@@ -1,14 +1,59 @@
-.BookCard{
-    width: 210px;
-    height: 320px;
-    margin: 20px;
+.bookWrapper{
+    width: 200px;
+    height: 250px;
     border-radius: 5px;
+    margin:25px;
+    position: relative;
+    perspective: 1000px;
 }
-.media{
-    height:200px;
+.frontPage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #EDCFCF;
+    z-index: 1;
+    backface-visibility: hidden;
+    transition: 500ms ease-in-out;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
-.BookCard:hover{
-    transition: .3s;
-    transform: scale(1.01);
-    box-shadow: 8px 3px 3px rgba(0,0,0,.5);
+.frontPage img{
+    width: 90%;
 }
+.backPage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-image: url("https://i.pinimg.com/originals/bd/59/4d/bd594d19f3ee9ace81b59909cb88e7dc.jpg");
+    background-position: center;
+    background-size: cover;
+    z-index: 0;
+    backface-visibility: hidden;
+    transition: 500ms ease-in-out;
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    border: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.backPage div{
+    width: 100%;
+    height: 50%;
+
+}
+.backPage div span{
+    content: '';
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+}
+.bookWrapper:hover .frontPage{ transform:rotateY(180deg);}
+.bookWrapper:hover .backPage{ transform:rotateY(360deg);}

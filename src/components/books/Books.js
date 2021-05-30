@@ -32,7 +32,8 @@ class  Books extends React.Component{
                             id: item.id,
                             name: item.name,
                             author: item.author?item.author.name: "No name",
-                            image: item.image?item.image.url: book_image
+                            image: item.image?item.image.url: book_image,
+                            rating: item.averageRating? item.averageRating:'no rating'
                         });
                         this.setState({books: arr})
                     })
