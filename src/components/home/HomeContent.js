@@ -1,5 +1,6 @@
 import React from "react";
 import BooksCarousel from "./BooksCarousel/BooksCarousel";
+import ProgressUI from "../general/ProgressUI/ProgressUI";
 
 const style = {
     contentBlocks : {
@@ -64,7 +65,7 @@ const HomeContent  = (props)=> {
                                     <BooksCarousel books={props.oldBooks.books}/>
                                 </div> :
                                 <div style={style.carouselBooksWrapper}>
-                                    <h3> Loading ... </h3>
+                                    <ProgressUI/>
                                 </div>
                         }
                     </div>
@@ -77,7 +78,7 @@ const HomeContent  = (props)=> {
                                     <BooksCarousel books={props.newBooks.books}/>
                                 </div> :
                                 <div style={style.carouselBooksWrapper}>
-                                    <h3> Loading ... </h3>
+                                    <ProgressUI/>
                                 </div>
                         }
                     </div>

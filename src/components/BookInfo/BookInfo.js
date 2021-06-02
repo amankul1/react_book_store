@@ -10,6 +10,7 @@ import InputUI from "../UserRoom/UserRoomUI/InputUI/InputUI";
 import detIcon from "../UserRoom/UserRoomIcons/trashIcon.png";
 import updateIcon from "../UserRoom/UserRoomIcons/changeIcon.png";
 import CommentUpdateWindow from "../general/CommentUpdateWindow/CommentUpdateWindow";
+import ProgressUI from "../general/ProgressUI/ProgressUI";
 
 const BookInfo = ({match, location})=> {
     const myContext = useContext(userContext);
@@ -170,99 +171,106 @@ const BookInfo = ({match, location})=> {
             <div className={classes.headerWrapper}>
                 <HeaderComponent/>
             </div>
-            <div className={classes.contentWrapper}>
-                <div className={classes.contentLeft}>
-                    <img src={image?image:def_book_image} alt=""/>
-                </div>
-                <div className={classes.contentRight}>
-                    <div>
-                        <div className={classes.title}><h3>{name?name:"Not name"}</h3></div>
-                        <div className={classes.content}>
-                            <div className={classes.contentItem}>
-                                <h5>Author:</h5>
-                                <p>
-                                    {author? <NavLink to={`/book/author/${author.id}`}>{author.name}</NavLink>: "Not author"}
-'                                </p>
-                            </div>
-                            <div className={classes.contentItem}>
-                                <h5>Rating:</h5>
-                                <p>{rating?rating:"Not rating"}</p>
-                            </div>
-                            <div className={classes.contentItem}>
-                                <h5>Gender:</h5>
-                                <p>{gender?gender:"Not gender"}</p>
-                            </div>
-                            {
-                                pdfData?
-                                    <div className={classes.contentItem}>
-                                    <h5><a href={pdfData?pdfData.url:''} download> Download </a></h5>
-                                </div>:
-                                    <h5>You can't download this book</h5>
-                            }
+
+            {
+                name?
+                    <div className={classes.contentWrapper}>
+                        <div className={classes.contentLeft}>
+                            <img src={image?image:def_book_image} alt=""/>
                         </div>
-                    </div>
-                    <div>
-                        <div className={classes.title}><h3>Comments</h3></div>
-                        <div className={classes.content}>
-                            {comments.length > 0?
-                                comments.map((item, index)=>{
-                                    return(
-                                        <div key={index} className={classes.contentCommentsItem}>
-                                            <div className={classes.userName}>{item.user? item.user.name: "undefined"}:</div>
-                                            <div className={classes.commentMessage}>{item.description? item.description:"Not massage"}</div>
-                                            <div className={classes.commentRating}> Rating: {item.rating} </div>
-                                            <div className={classes.delUpdButtons}>
-                                                <img src={updateIcon} onClick={(e)=>{updateHandler(e,item.id, item.description, item.rating)}} alt='' />
-                                                <img src={detIcon} onClick={()=>{delComment(item.id)}} alt='' />
-                                            </div>
-                                        </div>
-
-                                    )
-                                }):
-                                <div className={classes.contentItem}>
-                                    <p>Not comments yet</p>
-                                </div>
-                            }
-                            {
-                                isCommentAdding?
+                        <div className={classes.contentRight}>
+                            <div>
+                                <div className={classes.title}><h3>{name?name:"Not name"}</h3></div>
+                                <div className={classes.content}>
                                     <div className={classes.contentItem}>
-                                        <form className={classes.commentForm}>
-                                            <InputUI
-                                                label="Rating (0-5)"
-                                                type='Number'
-                                                isValid={true}
-                                                onChange={(e)=>{
-                                                    setRatingNumber(e.target.value);
-                                                }}
-                                                value={ratingNumber}
-                                            />
-
-                                            <InputUI
-                                                label="Comment text"
-                                                type='text'
-                                                isValid={isValid}
-                                                onChange={(e)=>{
-                                                    setText(e.target.value)
-                                                    if(e.target.value.length > 0){
-                                                        setIsValid(true)
-                                                    }else{
-                                                        setIsValid(false);
-                                                    }
-                                                }}
-                                                value={text}
-                                            />
-                                            <button className='btn btn-warning' onClick={cancelHandler}>Cancel</button>
-                                            <button className='btn btn-success' onClick={addHandler}>Add</button>
-                                        </form>
-                                    </div>:
-                                    <div className={classes.contentItem}>
-                                        <button className="btn btn-primary" onClick={addBookHandler}> Add comment</button>
+                                        <h5>Author:</h5>
+                                        <p>
+                                            {author? <NavLink to={`/book/author/${author.id}`}>{author.name}</NavLink>: "Not author"}
+                                            '                                </p>
                                     </div>
-                            }
+                                    <div className={classes.contentItem}>
+                                        <h5>Rating:</h5>
+                                        <p>{rating?rating:"Not rating"}</p>
+                                    </div>
+                                    <div className={classes.contentItem}>
+                                        <h5>Gender:</h5>
+                                        <p>{gender?gender:"Not gender"}</p>
+                                    </div>
+                                    {
+                                        pdfData?
+                                            <div className={classes.contentItem}>
+                                                <h5><a href={pdfData?pdfData.url:''} download> Download </a></h5>
+                                            </div>:
+                                            <h5>You can't download this book</h5>
+                                    }
+                                </div>
+                            </div>
+                            <div>
+                                <div className={classes.title}><h3>Comments</h3></div>
+                                <div className={classes.content}>
+                                    {comments.length > 0?
+                                        comments.map((item, index)=>{
+                                            return(
+                                                <div key={index} className={classes.contentCommentsItem}>
+                                                    <div className={classes.userName}>{item.user? item.user.name: "undefined"}:</div>
+                                                    <div className={classes.commentMessage}>{item.description? item.description:"Not massage"}</div>
+                                                    <div className={classes.commentRating}> Rating: {item.rating} </div>
+                                                    <div className={classes.delUpdButtons}>
+                                                        <img src={updateIcon} onClick={(e)=>{updateHandler(e,item.id, item.description, item.rating)}} alt='' />
+                                                        <img src={detIcon} onClick={()=>{delComment(item.id)}} alt='' />
+                                                    </div>
+                                                </div>
+
+                                            )
+                                        }):
+                                        <div className={classes.contentItem}>
+                                            <p>Not comments yet</p>
+                                        </div>
+                                    }
+                                    {
+                                        isCommentAdding?
+                                            <div className={classes.contentItem}>
+                                                <form className={classes.commentForm}>
+                                                    <InputUI
+                                                        label="Rating (0-5)"
+                                                        type='Number'
+                                                        isValid={true}
+                                                        onChange={(e)=>{
+                                                            setRatingNumber(e.target.value);
+                                                        }}
+                                                        value={ratingNumber}
+                                                    />
+
+                                                    <InputUI
+                                                        label="Comment text"
+                                                        type='text'
+                                                        isValid={isValid}
+                                                        onChange={(e)=>{
+                                                            setText(e.target.value)
+                                                            if(e.target.value.length > 0){
+                                                                setIsValid(true)
+                                                            }else{
+                                                                setIsValid(false);
+                                                            }
+                                                        }}
+                                                        value={text}
+                                                    />
+                                                    <button className='btn btn-warning' onClick={cancelHandler}>Cancel</button>
+                                                    <button className='btn btn-success' onClick={addHandler}>Add</button>
+                                                </form>
+                                            </div>:
+                                            <div className={classes.contentItem}>
+                                                <button className="btn btn-primary" onClick={addBookHandler}> Add comment</button>
+                                            </div>
+                                    }
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </div>:
+                    <ProgressUI/>
+                }
+            }
+
             <div className={classes.footerWrapper}>
 
             </div>

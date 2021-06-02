@@ -13,7 +13,6 @@ class  Books extends React.Component{
         this.state = {
             books:[],
             tops:[
-                {name: "By date"},
                 {name: "By name"},
                 {name: "By author"},
                 {name: "By rating"}
@@ -51,18 +50,23 @@ class  Books extends React.Component{
 
     subMenuHandler = (active) => {
         let type = active.toLowerCase();
+        let st = {...this.state};
         switch (type) {
-            case 'by date':
-                this.setState({activeTitle: active});
-                break;
+
             case 'by name':
                 this.setState({activeTitle: active});
+                st.books.sort((a, b)=>a.name > b.name? 1 : -1);
+                this.setState(st);
                 break;
             case 'by author':
                 this.setState({activeTitle: active});
+                st.books.sort((a, b)=>a.author > b.author? 1 : -1);
+                this.setState(st);
                 break;
             case 'by rating':
                 this.setState({activeTitle: active});
+                st.books.sort((a, b)=>a.rating < b.rating? 1 : -1);
+                this.setState(st);
                 break;
         }
     }

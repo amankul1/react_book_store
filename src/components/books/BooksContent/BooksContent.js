@@ -3,6 +3,7 @@ import classes from "./BooksContent.module.css";
 import BookCard from "../../general/BookCard/BookCard";
 import SubMenu from "../../general/SubMenu/SubMenu";
 import {NavLink} from "react-router-dom";
+import ProgressUI from "../../general/ProgressUI/ProgressUI";
 
 const BooksContent = (props)=>{
     return(
@@ -38,7 +39,7 @@ const BooksContent = (props)=>{
                             }
                         </>
                         :
-                        "Loading ..."
+                        <ProgressUI/>
                 }
             </div>
             <div className={classes.CategoryAdvertisingWrapper}>

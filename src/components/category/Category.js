@@ -14,14 +14,16 @@ class  Category extends React.Component{
         this.state = {
             activeGender: '',
             books:[],
-            genders:[]
-
+            genders:[],
+            tempBooks:[],
+            isProgress: false
         }
     }
 
     async componentDidMount() {
         this.myAxios = getAxios();
         try{
+            this.setState({isProgress: true});
             const response =  await this.myAxios.get('/category');
             let arr = [];
             if(response.data.length > 0){
@@ -45,15 +47,18 @@ class  Category extends React.Component{
                         id: item.id,
                         name: item.name,
                         author: item.author? item.author.name: 'No name',
-                        image: item.image?item.image.url:defImageBook
+                        image: item.image?item.image.url:defImageBook,
+                        category: item.category?item.category.name:null
                     });
                 })
                 const tempState = {...this.state}
                 tempState.books = array;
                 this.setState(tempState);
+                this.subMenuHandler(this.state.activeGender);
             }
+            this.setState({isProgress: false});
         }catch (e){
-            alert("What went wrong 1 !")
+            alert("What went wrong 1 !");
         }
     }
 
@@ -61,6 +66,12 @@ class  Category extends React.Component{
         try{
             let st = {...this.state};
             st.activeGender = name;
+            st.tempBooks=[];
+            st.books.forEach((item)=>{
+                if(item.category===name){
+                    st.tempBooks.push(item);
+                }
+            })
             this.setState(st);
         }catch (e){
             alert(e.message);
@@ -75,9 +86,10 @@ class  Category extends React.Component{
 
                 <CategoryContent
                     onClick={this.subMenuHandler}
-                    books = {this.state.books}
+                    books = {this.state.tempBooks}
                     genders = {this.state.genders}
                     activeGender = {this.state.activeGender}
+                    isProgress= {this.state.isProgress}
                 />
 
                 <FooterComponent/>

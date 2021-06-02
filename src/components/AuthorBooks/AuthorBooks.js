@@ -7,6 +7,7 @@ import BookCard from "../general/BookCard/BookCard";
 import {NavLink} from "react-router-dom";
 import book_image from "../UserRoom/UserRoomIcons/default_book_image.png"
 import axios from "axios";
+import ProgressUI from "../general/ProgressUI/ProgressUI";
 
 class AuthorBooks extends React.Component{
     state = {
@@ -66,7 +67,7 @@ class AuthorBooks extends React.Component{
                                         })
                                     }
                                 </>:
-                                'Not books or loading, please wait some time'
+                                <ProgressUI/>
                         }
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./AuthorsContent.module.css";
 import AuthorCard from "../../general/AuthorCard/AuthorCard";
 import {NavLink} from "react-router-dom";
+import ProgressUI from "../../general/ProgressUI/ProgressUI";
 
 const AuthorsContent = (props)=>{
     return(
@@ -25,7 +26,7 @@ const AuthorsContent = (props)=>{
                             )
                         })}
                     </>:
-                    "Loading ..."
+                    <ProgressUI/>
                 }
             </div>
             <div className={classes.CategoryAdvertisingWrapper}>
