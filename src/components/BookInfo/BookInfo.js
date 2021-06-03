@@ -33,7 +33,7 @@ const BookInfo = ({match, location})=> {
         try{
             const response = await myAxios.get(`/book/${match.params.id}`);
             setBookId(response.data.id);
-            setName(response.data.name);
+            setName(response.data.name?response.data.name:'');
             setAuthor(response.data.author?response.data.author:"Not author");
             setGender(response.data.category?response.data.category.name: "undefined");
             setRating(response.data.averageRating);
@@ -186,7 +186,7 @@ const BookInfo = ({match, location})=> {
                                         <h5>Author:</h5>
                                         <p>
                                             {author? <NavLink to={`/book/author/${author.id}`}>{author.name}</NavLink>: "Not author"}
-                                            '                                </p>
+                                        </p>
                                     </div>
                                     <div className={classes.contentItem}>
                                         <h5>Rating:</h5>

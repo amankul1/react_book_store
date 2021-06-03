@@ -13,10 +13,12 @@ class AuthorBooks extends React.Component{
     state = {
         authorName: '',
         books:[],
+        isProgress: false,
     }
 
     componentDidMount() {
         const arr=[];
+        this.setState({isProgress: true});
         axios.get(`https://pj-bookstore.herokuapp.com/book/author/${this.props.match.params.id}`).then(
             response=>{
                 if(response.data.length>0){
@@ -33,11 +35,12 @@ class AuthorBooks extends React.Component{
                         this.setState({books: arr})
                     })
                 }
-
+                this.setState({isProgress: false});
             }
         ).catch(
             e=>{
                 alert(e.message);
+                this.setState({isProgress: false});
             }
         )
     }
@@ -67,7 +70,9 @@ class AuthorBooks extends React.Component{
                                         })
                                     }
                                 </>:
-                                <ProgressUI/>
+                                this.state.isProgress?
+                                    <ProgressUI/>:
+                                    "Empty"
                         }
                     </div>
                 </div>
